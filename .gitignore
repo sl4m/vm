@@ -1,0 +1,4 @@
+*.box
+iso/
+.vagrant
+cookbooks/git/files/default/.gitconfig

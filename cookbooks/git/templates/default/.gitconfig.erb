@@ -1,0 +1,20 @@
+[user]
+  name = <%= @full_name %>
+  email = <%= @email %>
+[github]
+  user = <%= @username %>
+[core]
+  editor = vim
+[color]
+  ui = true
+[alias]
+  br = branch
+  co = checkout
+  hist = log --pretty=format:\"%Cgreen%h%Creset %Cblue%ad%Creset %s%C(yellow)%d%Creset %Cblue[%an]%Creset\" --graph --date=short
+  serve = !git daemon --reuseaddr --verbose --base-path=. --export-all --enable=receive-pack ./.git
+  st = status
+  staged = diff --staged
+[push]
+  default = tracking
+[core]
+  editor = vim
