@@ -35,3 +35,8 @@ cookbook_file File.join(firefox_profile_dir, 'user.js') do
   action :create
 end
 
+template "#{ENV['HOME']}/.zsh/xvfb.zsh" do
+  owner ENV['USER']
+  action :create
+  variables :display => ENV['DISPLAY']
+end

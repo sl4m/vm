@@ -28,7 +28,7 @@ apt-get -y update
 apt-get -y upgrade
 apt-get -y install linux-headers-$(uname -r) build-essential
 apt-get -y install zlib1g-dev libssl-dev libreadline-gplv2-dev
-apt-get -y install ruby rubygems
+apt-get -y install ruby1.9.1
 apt-get clean
 
 # Installing chef & Puppet

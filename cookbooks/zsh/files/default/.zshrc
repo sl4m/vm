@@ -4,13 +4,12 @@ autoload colors
 compinit
 colors
 
-#Path
-export PATH=$HOME/.bin:$PATH
+# Path
+export PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
 
 # Env Vars
 export EDITOR=vim
 export CLICOLOR=1
-export DISPLAY="<%= @display %>"
 
 # Options
 setopt EXTENDED_HISTORY # add timestamps to history
@@ -31,23 +30,7 @@ zstyle ':completion::complete:*' use-cache 1
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}' # case insensitive completion
 zstyle ':completion:*:default' menu 'select=0' # menu-style
 
-vc_prompt_info() {
-  echo "%{$fg[cyan]%}[$(vcprompt -f %b%m%u)]%{$reset_color%}"
-}
-
-cwd() {
-  echo "%{$fg[magenta]%}%~%{$reset_color%}"
-}
-
-export PROMPT="
-\$(cwd) \$(vc_prompt_info)
-%{$fg[blue]%}%%%{$reset_color%} "
-
 bindkey -e
 bindkey '^r' history-incremental-search-backward
 
-source $HOME/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-
-[[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm" # Load RVM function
-
-PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
+for config_file ($HOME/.zsh/*.zsh(.N)) source $config_file

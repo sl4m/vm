@@ -1,4 +1,4 @@
-package 'vim-common' do
+package 'vim-nox' do
   action :install
 end
 
@@ -6,15 +6,14 @@ package 'vim-runtime' do
   action :install
 end
 
-package 'vim-nox' do
-  action :install
-end
-
 cookbook_file "#{ENV['HOME']}/.vimrc" do
+  owner ENV['USER']
   action :create
 end
 
-remote_directory "#{ENV['HOME']}/.vim" do
+vim_dir = "#{ENV['HOME']}/.vim"
+
+remote_directory vim_dir do
   overwrite true
   purge true
   owner ENV['USER']
@@ -22,14 +21,48 @@ remote_directory "#{ENV['HOME']}/.vim" do
   action :create
 end
 
-# clone git modules
+bundle_dir = "#{vim_dir}/bundle"
 
-#bash "build command-t" do
-#  user ENV['USER']
-#  code <<-EOH
-#  cd #{vim_dotfiles_dir}/vim/bundle/command-t/ruby/command-t
-#  ruby extconf.rb
-#  make clean
-#  make
-#  EOH
-#end
+directory bundle_dir do
+  owner ENV['USER']
+  action :create
+end
+
+git "#{bundle_dir}/command-t" do
+  repository 'https://github.com/wincent/Command-T.git'
+  reference 'master'
+  action :sync
+end
+
+bash 'build command-t' do
+  code <<-EOH
+  cd #{bundle_dir}/command-t/ruby/command-t
+  ruby extconf.rb
+  make clean
+  make
+  EOH
+end
+
+git "#{bundle_dir}/vim-fugitive" do
+  repository 'https://github.com/tpope/vim-fugitive.git'
+  reference 'master'
+  action :sync
+end
+
+git "#{bundle_dir}/vim-ruby" do
+  repository 'https://github.com/vim-ruby/vim-ruby.git'
+  reference 'master'
+  action :sync
+end
+
+git "#{bundle_dir}/vim-ruby" do
+  repository 'https://github.com/vim-ruby/vim-ruby.git'
+  reference 'master'
+  action :sync
+end
+
+git "#{bundle_dir}/nerdtree" do
+  repository 'https://github.com/scrooloose/nerdtree.git'
+  reference 'master'
+  action :sync
+end

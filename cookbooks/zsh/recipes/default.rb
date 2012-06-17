@@ -1,5 +1,4 @@
 package 'zsh' do
-  version '4.3.17-1ubuntu1'
   action :install
 end
 
@@ -8,43 +7,39 @@ directory "#{ENV['HOME']}/.bin" do
   action :create
 end
 
-directory "#{ENV['HOME']}/.zsh" do
+remote_file "#{ENV['HOME']}/.bin/vcprompt" do
+  owner ENV['USER']
+  mode 0755
+  action :create
+  source 'https://github.com/djl/vcprompt/raw/master/bin/vcprompt'
+end
+
+zsh_files_dir = "#{ENV['HOME']}/.zsh"
+
+directory zsh_files_dir do
   owner ENV['USER']
   action :create
 end
 
-vcprompt_exec = "#{ENV['HOME']}/.bin/vcprompt"
-bash 'install vcprompt' do
-  user ENV['USER']
-  code <<-EOH
-  curl -sL https://github.com/djl/vcprompt/raw/master/bin/vcprompt > #{vcprompt_exec}
-  chmod 755 #{vcprompt_exec}
-  EOH
-end
-
-git "#{ENV['HOME']}/zsh-syntax-highlighting" do
+git "#{zsh_files_dir}/zsh-syntax-highlighting" do
   repository 'https://github.com/zsh-users/zsh-syntax-highlighting.git'
   reference 'master'
   action :sync
 end
 
-directory "#{ENV['HOME']}/.zsh/zsh-syntax-highlighting" do
-  action :create
-end
-
-bash 'copy zsh-syntax-highlighting' do
-  code "cp -r #{ENV['HOME']}/zsh-syntax-highlighting/* #{ENV['HOME']}/.zsh/zsh-syntax-highlighting"
-end
-
-directory "#{ENV['HOME']}/zsh-syntax-highlighting" do
-  recursive true
-  action :delete
-end
-
-template "#{ENV['HOME']}/.zshrc" do
+cookbook_file "#{zsh_files_dir}/zsh-syntax-highlighting.zsh" do
   owner ENV['USER']
   action :create
-  variables :display => ENV['DISPLAY']
+end
+
+cookbook_file "#{zsh_files_dir}/prompt.zsh" do
+  owner ENV['USER']
+  action :create
+end
+
+cookbook_file "#{ENV['HOME']}/.zshrc" do
+  owner ENV['USER']
+  action :create
 end
 
 bash 'make ZSH the default login shell' do

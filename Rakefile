@@ -1,9 +1,9 @@
 
-desc 'Install the VM from scratch. Very long the first time'
-task :default => :install
-
-desc 'Install the VM from scratch. Very long the first time'
+desc 'Install the VM for the first time.'
 task :install => ['box:create', 'vm:reset']
+
+desc 'Completely reset the VM.'
+task :reset => ['box:reset', 'vm:reset']
 
 namespace :box do
 
@@ -47,6 +47,10 @@ namespace :vm do
 
   task :up do
     sh 'vagrant up --no-provision'
+  end
+
+  task :in do
+    sh 'vagrant ssh'
   end
 
   task :provision => :configure do
