@@ -13,14 +13,13 @@ Vagrant::Config.run do |config|
     chef.add_recipe('git')
     chef.add_recipe('zsh')
     chef.add_recipe('vim')
+    chef.add_recipe('tmux')
+    chef.add_recipe('xvfb')
     chef.add_recipe('ruby')
     chef.add_recipe('clojure')
-    chef.add_recipe('tmux')
     chef.add_recipe('redis')
     chef.add_recipe('postgres')
     chef.add_recipe('mysql')
-    chef.add_recipe('xvfb')
     chef.add_recipe('helper::cleanup')
   end
-
 end

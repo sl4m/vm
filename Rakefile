@@ -1,17 +1,15 @@
 
-desc 'Install the VM for the first time.'
-task :install => ['box:create', 'vm:reset']
+desc 'Install the Base Box and VM. (first time)'
+task :install => ['box:create', 'vm:create']
 
-desc 'Completely reset the VM.'
+desc 'Reset the Base Box and VM. (after first time)'
 task :reset => ['box:reset', 'vm:reset']
 
 namespace :box do
 
-  desc 'Create the vagrant box (the base vm) and install it'
-  task :create => [:build, :export,  :add]
-
-  desc 'Destroy the vagrant box and recreate it'
   task :reset => [:remove, :create]
+
+  task :create => [:build, :export,  :add]
 
   task :build do
     sh 'veewee vbox build development-vm --force'
@@ -32,8 +30,9 @@ end
 
 namespace :vm do
 
-  desc 'Reset the VM (destroy and recreate)'
-  task :reset => [:destroy, :up, :provision]
+  task :reset => [:destroy, :create]
+
+  task :create => [:up, :provision]
 
   task :destroy do
     sh 'vagrant destroy -f'
@@ -45,11 +44,14 @@ namespace :vm do
     sh 'vagrant halt'
   end
 
+  desc 'Open the VM'
+  task :open => [:up, :ssh]
+
   task :up do
     sh 'vagrant up --no-provision'
   end
 
-  task :in do
+  task :ssh do
     sh 'vagrant ssh'
   end
 
