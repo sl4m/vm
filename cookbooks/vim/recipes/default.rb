@@ -2,10 +2,6 @@ package 'vim-nox' do
   action :install
 end
 
-package 'vim-runtime' do
-  action :install
-end
-
 cookbook_file "#{ENV['HOME']}/.vimrc" do
   owner ENV['USER']
   action :create
