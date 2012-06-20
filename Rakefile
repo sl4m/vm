@@ -40,8 +40,19 @@ namespace :vm do
 
   task :reload => [:down, :up]
 
+  desc 'Shutdown the VM'
   task :down do
     sh 'vagrant halt'
+  end
+
+  desc 'Kill the VM'
+  task :kill do
+    sh "VBoxManage controlvm #{ENV['VM']} poweroff"
+  end
+
+  desc 'List all running VMs'
+  task :list do
+    sh 'VBoxManage list runningvms'
   end
 
   desc 'Open the VM'
