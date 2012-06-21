@@ -16,7 +16,7 @@ namespace :box do
   end
 
   task :export do
-    sh 'vagrant basebox export development-vm --force'
+    sh 'vagrant package --base development-vm --output development-vm.box'
   end
 
   task :add do
@@ -24,6 +24,7 @@ namespace :box do
   end
 
   task :remove do
+    sh 'rm development-vm.box'
     sh 'vagrant box remove development-vm'
   end
 end
