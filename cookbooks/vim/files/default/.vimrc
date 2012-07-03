@@ -5,6 +5,9 @@ filetype off
 call pathogen#infect()
 filetype plugin indent on
 
+" Options
+set autoindent
+set nosmartindent
 set history=10000
 set number
 set showmatch
@@ -23,6 +26,11 @@ set cursorline
 set wrap
 set noswapfile
 set bs=2
+set winwidth=90
+set winminwidth=15
+set winheight=5
+set winminheight=5
+set winheight=999
 
 " Highlight trailing whitespace
 autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
@@ -68,6 +76,9 @@ endfunction
 command! -nargs=0 Trim :call Trim()
 nnoremap <silent> <Leader>tw :Trim<CR>
 
+let vimclojure#HighlightBuiltins=0
+let vimclojure#ParenRainbow=1
+let NERDTreeShowHidden=1
 let g:CommandTAcceptSelectionSplitMap=['<C-s>']
 let g:CommandTAcceptSelectionVSplitMap=['<C-v>']
 let g:CommandTCancelMap=['<Esc>', '<C-c>']

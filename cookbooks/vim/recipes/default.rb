@@ -62,3 +62,9 @@ git "#{bundle_dir}/nerdtree" do
   reference 'master'
   action :sync
 end
+
+git "#{bundle_dir}/vim-clojure" do
+  repository 'https://github.com/vim-scripts/VimClojure.git'
+  reference 'master'
+  action :sync
+end

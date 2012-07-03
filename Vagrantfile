@@ -20,6 +20,8 @@ Vagrant::Config.run do |config|
     chef.add_recipe('redis')
     chef.add_recipe('postgres')
     chef.add_recipe('mysql')
+    chef.add_recipe('node')
+    chef.add_recipe('coffee_script')
     chef.add_recipe('helper::cleanup')
   end
 end
