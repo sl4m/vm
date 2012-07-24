@@ -25,3 +25,8 @@ cookbook_file "#{ENV['HOME']}/.zsh/rvm.zsh" do
   owner ENV['USER']
   action :create
 end
+
+cookbook_file "#{ENV['HOME']}/.zsh/ruby.zsh" do
+  owner ENV['USER']
+  action :create
+end

@@ -68,3 +68,9 @@ git "#{bundle_dir}/vim-clojure" do
   reference 'master'
   action :sync
 end
+
+git "#{bundle_dir}/vim-coffee-script" do
+  repository 'https://github.com/kchmck/vim-coffee-script.git'
+  reference 'master'
+  action :sync
+end

@@ -10,18 +10,29 @@ Vagrant::Config.run do |config|
   config.vm.provision :chef_solo do |chef|
     chef.cookbooks_path = 'cookbooks'
     chef.add_recipe('helper::setup')
+
+    # Dev Tools
     chef.add_recipe('git')
     chef.add_recipe('zsh')
     chef.add_recipe('vim')
     chef.add_recipe('tmux')
-    chef.add_recipe('xvfb')
+
+    # Languages
     chef.add_recipe('ruby')
     chef.add_recipe('clojure')
+    chef.add_recipe('node')
+    chef.add_recipe('coffee_script')
+    chef.add_recipe('go')
+
+    # Datastores
     chef.add_recipe('redis')
     chef.add_recipe('postgres')
     chef.add_recipe('mysql')
-    chef.add_recipe('node')
-    chef.add_recipe('coffee_script')
+
+    # Headless browsers
+    chef.add_recipe('xvfb')
+    chef.add_recipe('phantomjs')
+
     chef.add_recipe('helper::cleanup')
   end
 end
