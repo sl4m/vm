@@ -74,3 +74,9 @@ git "#{bundle_dir}/vim-coffee-script" do
   reference 'master'
   action :sync
 end
+
+git "#{bundle_dir}/mustache.vim" do
+  repository 'https://github.com/juvenn/mustache.vim.git'
+  reference 'master'
+  action :sync
+end
