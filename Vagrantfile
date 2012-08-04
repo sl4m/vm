@@ -16,6 +16,7 @@ Vagrant::Config.run do |config|
     chef.add_recipe('zsh')
     chef.add_recipe('vim')
     chef.add_recipe('tmux')
+    chef.add_recipe('ack')
 
     # Languages
     chef.add_recipe('ruby')
@@ -28,6 +29,7 @@ Vagrant::Config.run do |config|
     chef.add_recipe('redis')
     chef.add_recipe('postgres')
     chef.add_recipe('mysql')
+    chef.add_recipe('riak')
 
     # Headless browsers
     chef.add_recipe('xvfb')
