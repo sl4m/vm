@@ -2,8 +2,8 @@
 # is only because it hasn't been released yet.
 Veewee::Session.declare({
   :cpu_count => '4',
-  :memory_size=> '2048',
-  :disk_size => '10140',
+  :memory_size=> '8192',
+  :disk_size => '20140',
   :disk_format => 'VDI',
   :hostiocache => 'off',
   :os_type_id => 'Ubuntu_64',

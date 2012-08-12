@@ -20,6 +20,7 @@ Vagrant::Config.run do |config|
 
     # Languages
     chef.add_recipe('ruby')
+    chef.add_recipe('java')
     chef.add_recipe('clojure')
     chef.add_recipe('node')
     chef.add_recipe('coffee_script')
