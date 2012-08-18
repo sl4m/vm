@@ -1,17 +1,16 @@
 lein_dir = File.join(ENV['HOME'], '.lein')
 lein_bin_dir = File.join(lein_dir, 'bin')
 lein_self_install_dir = File.join(lein_dir, 'self-installs')
-lein_bin = File.join(lein_dir, 'lein')
+lein_bin = File.join(lein_dir, 'bin', 'lein')
 
 directory lein_bin_dir do
+  owner ENV['USER']
   action :create
   recursive true
 end
 
-remote_file lein_bin do
-  owner ENV['USER']
-  mode 0755
-  source 'https://raw.github.com/technomancy/leiningen/preview/bin/lein'
+file lein_bin do
+  action :delete
 end
 
 directory lein_self_install_dir do
@@ -20,7 +19,14 @@ directory lein_self_install_dir do
 end
 
 directory lein_self_install_dir do
+  owner ENV['USER']
   action :create
+end
+
+remote_file lein_bin do
+  owner ENV['USER']
+  mode 0755
+  source 'https://raw.github.com/technomancy/leiningen/preview/bin/lein'
 end
 
 bash 'install leiningen' do
