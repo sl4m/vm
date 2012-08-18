@@ -1,5 +1,3 @@
-# Don't be a sucker, use this vm config
-
 ## Installation
 
 ### Add your ssh keys
@@ -7,6 +5,7 @@
   `ssh-add ~/.ssh/id_rsa`
 
 ### Define your Base Box
+_italic_ Its default memory allocation is just over 8gb, so if you run an air, you'll want to modify that to a lower memory allocation
 
   `cp definitions/development-vm/definition.rb.example definitions/development-vm/definition.rb`
 
