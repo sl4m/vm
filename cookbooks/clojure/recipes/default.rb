@@ -21,7 +21,7 @@ end
 
 bash 'install leiningen' do
   user ENV['USER']
-  code "#{lein_bin} self-install"
+  code "HTTP_CLIENT=\"wget --no-check-certificate -O\" #{lein_bin} self-install"
 end
 
 cookbook_file "#{ENV['HOME']}/.zsh/leiningen.zsh" do
