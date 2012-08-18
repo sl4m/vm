@@ -59,7 +59,7 @@ namespace :vm do
   desc 'Open the VM'
   task :open => [:up, :ssh]
 
-  task :up do
+  task :up => :configure do
     sh 'vagrant up --no-provision'
   end
 
