@@ -19,9 +19,13 @@ directory lein_self_install_dir do
   recursive true
 end
 
+directory lein_self_install_dir do
+  action :create
+end
+
 bash 'install leiningen' do
   user ENV['USER']
-  code "sudo HTTP_CLIENT=\"wget --no-check-certificate -O\" #{lein_bin} self-install"
+  code "#{lein_bin} self-install"
 end
 
 cookbook_file "#{ENV['HOME']}/.zsh/leiningen.zsh" do
