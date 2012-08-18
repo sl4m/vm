@@ -28,9 +28,10 @@ Vagrant::Config.run do |config|
 
     # Datastores
     chef.add_recipe('redis')
+    chef.add_recipe('riak')
     chef.add_recipe('postgres')
     chef.add_recipe('mysql')
-    chef.add_recipe('riak')
+    chef.add_recipe('sqlite')
 
     # Headless browsers
     chef.add_recipe('xvfb')

@@ -1,5 +1,7 @@
-package 'curl' do
-  action :install
+%w(curl libxslt-dev libxml2-dev).each do |p|
+  package p do
+    action :install
+  end
 end
 
 rvm_path = "#{ENV['HOME']}/.rvm"
