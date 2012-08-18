@@ -18,4 +18,8 @@
 
 ### Reset the VM (after first time)
 
-  `rake install`
+  `rake reset`
+
+### After the box is set up and you modify chef recipies
+
+  `rake vm:provision`
