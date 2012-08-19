@@ -1,28 +1,18 @@
-package 'vim-nox' do
-  action :install
-end
+package 'vim-nox'
 
-cookbook_file "#{ENV['HOME']}/.vimrc" do
-  owner ENV['USER']
-  action :create
-end
+user_cookbook_file '.vimrc'
 
-vim_dir = "#{ENV['HOME']}/.vim"
+vim_dir = Helper.home('.vim')
 
-remote_directory vim_dir do
+user_remote_directory vim_dir do
   overwrite true
   purge true
-  owner ENV['USER']
   recursive true
-  action :create
 end
 
 bundle_dir = "#{vim_dir}/bundle"
 
-directory bundle_dir do
-  owner ENV['USER']
-  action :create
-end
+user_directory bundle_dir
 
 git "#{bundle_dir}/command-t" do
   repository 'https://github.com/wincent/Command-T.git'

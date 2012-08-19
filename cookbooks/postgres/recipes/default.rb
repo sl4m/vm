@@ -1,11 +1,9 @@
-package 'postgresql-9.1' do
-  action :install
-end
+package 'postgresql-9.1'
 
 # turn on trust authentication
 hba_conf = '/etc/postgresql/9.1/main/pg_hba.conf'
 
-bash 'first trust authentication' do
+bash 'trust authentication' do
   code "sudo sed -i -e \"/local\\\\s\\+all\\\\s\\+all\\\\s\\+peer/c local\\\\tall\\\\tall\\\\ttrust\" #{hba_conf}"
 end
 
@@ -19,7 +17,7 @@ end
 
 bash 'create new role' do
   user 'postgres'
-  code "createuser -s #{ENV['USER']}"
+  code "createuser -s #{Helper.user}"
   returns [0, 1]
 end
 

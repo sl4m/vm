@@ -1,25 +1,15 @@
-package 'zsh' do
-  action :install
-end
+package 'zsh'
 
-directory "#{ENV['HOME']}/.bin" do
-  owner ENV['USER']
-  action :create
-end
+home_directory '.bin'
 
-remote_file "#{ENV['HOME']}/.bin/vcprompt" do
-  owner ENV['USER']
+user_remote_file Helper.home('.bin/vcprompt') do
   mode 0755
-  action :create
   source 'https://github.com/djl/vcprompt/raw/master/bin/vcprompt'
 end
 
-zsh_files_dir = "#{ENV['HOME']}/.zsh"
+home_directory '.zsh'
 
-directory zsh_files_dir do
-  owner ENV['USER']
-  action :create
-end
+zsh_files_dir = Helper.home('.zsh')
 
 git "#{zsh_files_dir}/zsh-syntax-highlighting" do
   repository 'https://github.com/zsh-users/zsh-syntax-highlighting.git'
@@ -27,21 +17,12 @@ git "#{zsh_files_dir}/zsh-syntax-highlighting" do
   action :sync
 end
 
-cookbook_file "#{zsh_files_dir}/zsh-syntax-highlighting.zsh" do
-  owner ENV['USER']
-  action :create
-end
+zsh_file 'zsh-syntax-highlighting'
 
-cookbook_file "#{zsh_files_dir}/prompt.zsh" do
-  owner ENV['USER']
-  action :create
-end
+zsh_file 'prompt'
 
-cookbook_file "#{ENV['HOME']}/.zshrc" do
-  owner ENV['USER']
-  action :create
-end
+user_cookbook_file '.zshrc'
 
 bash 'make ZSH the default login shell' do
-  code "sudo chsh -s `which zsh` #{ENV['USER']}"
+  code "sudo chsh -s `which zsh` #{Helper.user}"
 end

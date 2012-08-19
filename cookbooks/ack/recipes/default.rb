@@ -1,4 +1,4 @@
-package 'ack-grep' do
-  action :install
-end
+package 'ack-grep'
+
+user_cookbook_file '.ackrc'
 

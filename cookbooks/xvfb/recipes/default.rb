@@ -1,42 +1,33 @@
 %w(firefox xvfb x11-apps).each do |lib|
-  package lib do
-    action :install
-  end
+  package lib
 end
 
-directory "#{ENV['HOME']}/.xvfb" do
-  owner ENV['USER']
-  action :create
-end
+home_directory '.xvfb'
 
 cookbook_file '/etc/init.d/xvfb' do
   mode 0755
-  action :create
 end
 
-bash 'initialize init script' do
+bash 'initialize init deamon script' do
   code 'sudo update-rc.d xvfb defaults'
 end
+
+ENV['DISPLAY'] = Helper.display
 
 bash 'start xvfb' do
   code 'sudo /etc/init.d/xvfb start'
 end
 
-firefox_profile_dir = File.join(ENV['HOME'], '.mozilla/firefox/vagrant')
+firefox_profile_dir = Helper.home('.mozilla/firefox/vagrant')
 
-bash 'create a firefox profile' do
-  user ENV['USER']
-  code "firefox -CreateProfile \"#{ENV['USER']} #{firefox_profile_dir}\""
-  #not_if "test -d #{firefox_profile_dir}"
+user_bash 'create a firefox profile' do
+  code "firefox -CreateProfile \"#{Helper.user} #{firefox_profile_dir}\""
 end
 
 cookbook_file File.join(firefox_profile_dir, 'user.js') do
-  owner ENV['USER']
-  action :create
+  owner Helper.user
 end
 
-template "#{ENV['HOME']}/.zsh/xvfb.zsh" do
-  owner ENV['USER']
-  action :create
-  variables :display => ENV['DISPLAY']
+zsh_template 'xvfb' do
+  variables :display => Helper.display
 end

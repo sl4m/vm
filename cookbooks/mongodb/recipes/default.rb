@@ -1,3 +1,1 @@
-package 'mongodb' do
-  action :install
-end
+package 'mongodb'

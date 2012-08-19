@@ -3,3 +3,4 @@ iso/
 .vagrant
 cookbooks/git/files/default/.gitconfig
 definitions/development-vm/definition.rb
+*.swp

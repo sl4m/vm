@@ -1,8 +1,3 @@
-package 'git-core' do
-  action :install
-end
+package 'git-core'
 
-cookbook_file "#{ENV['HOME']}/.gitconfig" do
-  owner ENV['USER']
-  action :create
-end
+user_cookbook_file '.gitconfig'
