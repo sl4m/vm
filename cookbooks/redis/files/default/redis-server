@@ -11,7 +11,7 @@
 # Description:		redis-server - Persistent key-value db
 ### END INIT INFO
 
-DAEMON=/usr/local/bin/redis-server
+DAEMON=/usr/bin/redis-server
 DAEMON_ARGS=/etc/redis.conf
 NAME=redis-server
 DESC=redis-server
