@@ -34,6 +34,9 @@ Vagrant::Config.run do |config|
     chef.add_recipe('mysql')
     chef.add_recipe('sqlite')
 
+    # Search Engines
+    chef.add_recipe('elasticsearch')
+
     # Headless browsers
     chef.add_recipe('xvfb')
     chef.add_recipe('phantomjs')

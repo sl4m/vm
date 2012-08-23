@@ -39,7 +39,7 @@ namespace :vm do
     sh 'vagrant destroy -f'
   end
 
-  task :reload => [:down, :up]
+  task :reload => [:down, :open]
 
   desc 'Shutdown the VM'
   task :down do
