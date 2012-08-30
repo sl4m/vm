@@ -27,3 +27,6 @@
 ### After the box is set up and you modify chef recipies
 
   `rake vm:provision`
+
+#### Other Gotchas
+   `sudo dhclient` if your vm cannot connect to the internet
