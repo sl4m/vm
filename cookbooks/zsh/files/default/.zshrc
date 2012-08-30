@@ -19,6 +19,7 @@ alias rtest='ruby -I"lib:test"'
 alias bxr="bundle exec rspec"
 alias bxc="bundle exec cucumber"
 alias cuke="be cucumber"
+alias rage="be rake"
 
 # History
 export HISTSIZE=1000
