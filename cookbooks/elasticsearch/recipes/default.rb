@@ -40,6 +40,10 @@ cookbook_file '/etc/init.d/elasticsearch' do
   mode 0755
 end
 
+bash 'up the amount of open files for elasticsearch' do
+  code "sudo sed -i '$ a\* soft nofile 32000' /etc/security/limits.conf"
+end
+
 bash 'initialize init deamon script' do
   code 'sudo update-rc.d elasticsearch defaults'
 end
