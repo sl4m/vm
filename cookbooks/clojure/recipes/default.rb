@@ -3,7 +3,9 @@ lein_bin_dir = File.join(lein_dir, 'bin')
 lein_self_install_dir = File.join(lein_dir, 'self-installs')
 lein_bin = File.join(lein_dir, 'bin', 'lein')
 
-user_directory lein_bin_dir
+user_directory lein_bin_dir do
+  recursive true
+end
 
 user_file lein_bin do
   action :delete

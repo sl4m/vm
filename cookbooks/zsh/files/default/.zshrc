@@ -14,13 +14,6 @@ export CLICOLOR=1
 autoload colors
 colors
 
-# Aliases
-alias rtest='ruby -I"lib:test"'
-alias bxr="bundle exec rspec"
-alias bxc="bundle exec cucumber"
-alias cuke="be cucumber"
-alias rage="be rake"
-
 # History
 export HISTSIZE=1000
 setopt EXTENDED_HISTORY # add timestamps to history
