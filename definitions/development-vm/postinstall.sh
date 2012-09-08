@@ -31,7 +31,16 @@ apt-get -y install zlib1g-dev libssl-dev libreadline-gplv2-dev
 apt-get -y install ruby rubygems
 apt-get clean
 
+# Installing rvm and latest ruby
+apt-get -y install curl
+curl -L https://get.rvm.io | sudo bash -s stable
+sudo chown -R vagrant:admin /usr/local/rvm
+PATH=$PATH:/usr/local/rvm/bin
+source '/usr/local/rvm'
+rvm install 1.9.3
+
 # Installing chef & Puppet
+rvm use 1.9.3
 gem install chef --no-ri --no-rdoc
 
 # Installing vagrant keys
