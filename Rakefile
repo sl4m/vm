@@ -1,16 +1,18 @@
 require 'vagrant'
 
-desc 'Install the Base Box and VM. (first time)'
+desc 'Install the Base Box and VM.'
 task :install => ['box:create', 'vm:create']
 
-desc 'Reset the Base Box and VM. (after first time)'
-task :reset => ['box:reset', 'vm:reset']
+desc 'Reset the Base Box and VM.'
+task :reset => :install
 
 namespace :box do
+  task :create => [:remove, :build, :export, :add]
 
-  task :reset => [:remove, :create]
-
-  task :create => [:build, :export, :add]
+  task :remove do
+    sh 'rm -rf development-vm.box'
+    sh 'vagrant box remove development-vm virtualbox' do; end
+  end
 
   task :build do
     sh 'veewee vbox build development-vm --force'
@@ -23,21 +25,21 @@ namespace :box do
   task :add do
     sh 'vagrant box add development-vm development-vm.box'
   end
-
-  task :remove do
-    sh 'rm -rf development-vm.box'
-    sh 'vagrant box remove development-vm virtualbox' do; end
-  end
 end
 
 namespace :vm do
+  task :create => [:destroy, :up, :provision]
 
-  task :reset => [:destroy, :create]
+  task :up => :configure do
+    sh 'vagrant up --no-provision'
+  end
 
-  task :create => [:up, :provision]
+  task :provision => :configure do
+    sh 'vagrant provision'
+  end
 
   task :destroy do
-    sh 'vagrant destroy -f'
+    sh 'vagrant destroy -f' do; end
   end
 
   task :reload => [:down, :open]
@@ -45,6 +47,13 @@ namespace :vm do
   desc 'Shutdown the VM'
   task :down do
     sh 'vagrant halt'
+  end
+
+  desc 'Open the VM'
+  task :open => [:up, :ssh]
+
+  task :ssh do
+    sh 'vagrant ssh'
   end
 
   desc 'Kill the VM'
@@ -55,21 +64,6 @@ namespace :vm do
   desc 'List all running VMs'
   task :list do
     sh 'VBoxManage list runningvms'
-  end
-
-  desc 'Open the VM'
-  task :open => [:up, :ssh]
-
-  task :up => :configure do
-    sh 'vagrant up --no-provision'
-  end
-
-  task :ssh do
-    sh 'vagrant ssh'
-  end
-
-  task :provision => :configure do
-    sh 'vagrant provision'
   end
 
   task :configure => [:git_configure]

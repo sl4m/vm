@@ -26,13 +26,11 @@ apt-get -y install nfs-common
 # etc., and remove optional things to trim down the machine.
 apt-get -y update
 apt-get -y upgrade
-apt-get -y install linux-headers-$(uname -r) build-essential
-apt-get -y install zlib1g-dev libssl-dev libreadline-gplv2-dev
+apt-get -y install linux-headers-$(uname -r) build-essential openssl libreadline6 libreadline6-dev curl git-core zlib1g zlib1g-dev libssl-dev libyaml-dev libsqlite3-dev sqlite3 libxml2-dev libxslt-dev autoconf libc6-dev ncurses-dev automake libtool bison pkg-config
 apt-get -y install ruby rubygems
 apt-get clean
 
 # Installing rvm and latest ruby
-apt-get -y install curl
 curl -L https://get.rvm.io | sudo bash -s stable
 sudo chown -R vagrant:admin /usr/local/rvm
 PATH=$PATH:/usr/local/rvm/bin

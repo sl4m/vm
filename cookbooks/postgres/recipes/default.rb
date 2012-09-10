@@ -1,4 +1,6 @@
-package 'postgresql-9.1'
+%w(libpq-dev postgresql-9.1).each do |p|
+  package p
+end
 
 # turn on trust authentication
 hba_conf = '/etc/postgresql/9.1/main/pg_hba.conf'
