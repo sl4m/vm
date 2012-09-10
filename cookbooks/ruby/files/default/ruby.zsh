@@ -1,13 +1,9 @@
 # Aliases
 
-alias be="bundle exec"
-alias bi="bundle install"
-alias bu="bundle update"
-alias rtest='ruby -I"lib:test"'
-alias bxr="bundle exec rspec"
-alias bxc="bundle exec rake cucumber"
-alias cuke="bundle exec cucumber"
-alias rage="be rake"
+alias b='bundle'
+alias be='bundle exec'
+alias bi='bundle install'
+alias bu='bundle update'
 
 export RUBY_HEAP_MIN_SLOTS=1000000
 export RUBY_HEAP_SLOTS_INCREMENT=1000000

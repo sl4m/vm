@@ -3,7 +3,7 @@
 Vagrant::Config.run do |config|
   config.vm.box = 'development-vm'
 
-  config.vm.forward_port 8080, 1234
+  config.vm.forward_port 8080, 8080
 
   config.ssh.forward_agent = true
 
@@ -35,11 +35,10 @@ Vagrant::Config.run do |config|
     chef.add_recipe('sqlite')
 
     # Search Engines
-    chef.add_recipe('elasticsearch')
+    # chef.add_recipe('elasticsearch')
 
     # Headless browsers
-    chef.add_recipe('xvfb')
-    chef.add_recipe('phantomjs')
+    # chef.add_recipe('phantomjs')
 
     chef.add_recipe('helper::cleanup')
   end

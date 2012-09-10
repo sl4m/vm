@@ -1,3 +1,4 @@
+require 'vagrant'
 
 desc 'Install the Base Box and VM. (first time)'
 task :install => ['box:create', 'vm:create']
@@ -9,7 +10,7 @@ namespace :box do
 
   task :reset => [:remove, :create]
 
-  task :create => [:build, :export,  :add]
+  task :create => [:build, :export, :add]
 
   task :build do
     sh 'veewee vbox build development-vm --force'
@@ -24,8 +25,8 @@ namespace :box do
   end
 
   task :remove do
-    sh 'rm development-vm.box'
-    sh 'vagrant box remove development-vm'
+    sh 'rm -rf development-vm.box'
+    sh 'vagrant box remove development-vm virtualbox' do; end
   end
 end
 

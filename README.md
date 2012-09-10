@@ -10,9 +10,9 @@
 
 #### Default settings
 
+  * CPU Count: 4 - _If you do not have 4 cores, decrease this number._
   * Memory: 8gb - _If you do not have more than 8gb of RAM, decrease this number._
   * Hard Drive: 20gb
-  * CPU Count: 4 - _If you do not have 4 cores, decrease this number._
 
    Modify the settings to suit your needs.
 
@@ -29,4 +29,5 @@
   `rake vm:provision`
 
 #### Other Gotchas
+
    `sudo dhclient` if your vm cannot connect to the internet

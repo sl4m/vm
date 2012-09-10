@@ -1,5 +1,3 @@
-package 'tmux' do
-  version '1.6-1ubuntu1'
-end
+package 'tmux'
 
 user_cookbook_file '.tmux.conf'

@@ -1,12 +1,5 @@
 package 'zsh'
 
-home_directory '.bin'
-
-user_remote_file Helper.home('.bin/vcprompt') do
-  mode 0755
-  source 'https://github.com/djl/vcprompt/raw/master/bin/vcprompt'
-end
-
 home_directory '.zsh'
 
 zsh_files_dir = Helper.home('.zsh')
