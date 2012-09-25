@@ -1,6 +1,6 @@
 GIT
   remote: git://github.com/mitchellh/vagrant.git
-  revision: 678c6a070d46de76104ad2000906a8c4ade5467d
+  revision: 184f6dccb2d550a16eb895ce4339080473b3bfa2
   specs:
     vagrant (1.1.0.dev)
       archive-tar-minitar (= 0.5.2)
