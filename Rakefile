@@ -10,20 +10,20 @@ namespace :box do
   task :create => [:remove, :build, :export, :add]
 
   task :remove do
-    sh 'rm -rf development-vm.box'
-    sh 'vagrant box remove development-vm virtualbox' do; end
+    sh 'rm -rf skim-vm.box'
+    sh 'vagrant box remove skim-vm virtualbox' do; end
   end
 
   task :build do
-    sh 'veewee vbox build development-vm --force'
+    sh 'veewee vbox build skim-vm --force'
   end
 
   task :export do
-    sh 'vagrant package --base development-vm --output development-vm.box'
+    sh 'vagrant package --base skim-vm --output skim-vm.box'
   end
 
   task :add do
-    sh 'vagrant box add development-vm development-vm.box'
+    sh 'vagrant box add skim-vm skim-vm.box'
   end
 end
 

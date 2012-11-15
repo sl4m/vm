@@ -1,4 +1,4 @@
 source :rubygems
 
-gem 'vagrant', git: 'git://github.com/mitchellh/vagrant.git'
-gem 'veewee', '0.3.0.beta2'
+gem 'vagrant', '1.0.5'
+gem 'veewee',  '0.3.1'
