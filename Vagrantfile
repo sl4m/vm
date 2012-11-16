@@ -14,6 +14,7 @@ Vagrant::Config.run do |config|
     # Dev Tools
     chef.add_recipe('git')
     chef.add_recipe('zsh')
+    chef.add_recipe('vcprompt')
     chef.add_recipe('vim')
     chef.add_recipe('tmux')
     chef.add_recipe('ack')
