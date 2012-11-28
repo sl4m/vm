@@ -1,7 +1,8 @@
 *.box
-iso/
-.vagrant
-cookbooks/git/files/default/.gitconfig
-definitions/development-vm/definition.rb
 *.swp
 .rvmrc
+.vagrant
+Vagrantfile
+cookbooks/git/files/default/.gitconfig
+definitions/development-vm/definition.rb
+iso/
