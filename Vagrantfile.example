@@ -7,6 +7,9 @@ Vagrant::Config.run do |config|
 
   config.ssh.forward_agent = true
 
+  #config.vm.network :hostonly, '10.11.12.13'
+  #config.vm.share_folder('git', '/home/vagrant/git', '.', create: true, nfs: true)
+
   config.vm.provision :chef_solo do |chef|
     chef.cookbooks_path = 'cookbooks'
     chef.add_recipe('helper::setup')
