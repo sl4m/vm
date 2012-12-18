@@ -76,6 +76,7 @@ GEM
       log4r (~> 1.1.9)
       net-scp (~> 1.0.4)
       net-ssh (~> 2.2.2)
+    vagrant-vbguest (0.5.1)
     veewee (0.3.1)
       ansi (~> 1.3.0)
       childprocess
@@ -98,4 +99,5 @@ PLATFORMS
 
 DEPENDENCIES
   vagrant (= 1.0.5)
+  vagrant-vbguest (= 0.5.1)
   veewee (= 0.3.1)
