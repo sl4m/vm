@@ -1,3 +1,4 @@
+vimrc_dir = Helper.home('.vimrc')
 vim_dir = Helper.home('.vim')
 vim_dotfiles_dir = Helper.home('.vim_dotfiles')
 
@@ -10,16 +11,18 @@ git vim_dotfiles_dir do
   enable_submodules true
 end
 
-link "#{vim_dir}/.vimrc" do
-  Helper.user
-  to "#{vim_dotfiles_dir}/vimrc"
-  not_if "test -e #{vim_dir}/.vimrc"
+bash "link #{vimrc_dir}" do
+  code <<-EOH
+  ln -s #{vim_dotfiles_dir}/vimrc #{vimrc_dir}
+  EOH
+  not_if "test -e #{vimrc_dir}"
 end
 
-link "#{vim_dir}/.vim" do
-  Helper.user
-  to "#{vim_dotfiles_dir}/vim"
-  not_if "test -e #{vim_dir}/.vim"
+bash "link #{vim_dir}" do
+  code <<-EOH
+  ln -s #{vim_dotfiles_dir}/vim #{vim_dir}
+  EOH
+  not_if "test -e #{vim_dir}"
 end
 
 bash 'build command-t' do
