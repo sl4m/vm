@@ -1,4 +1,4 @@
-%w(libpq-dev postgresql-9.1).each do |p|
+%w(libpq-dev postgresql-9.2).each do |p|
   package p
 end
 
