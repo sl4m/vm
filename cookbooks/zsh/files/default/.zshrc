@@ -1,5 +1,5 @@
 # Path
-export PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
+export PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin:$PATH
 
 # Completion
 setopt COMPLETE_IN_WORD
@@ -15,7 +15,7 @@ autoload colors
 colors
 
 # History
-export HISTSIZE=1000
+export HISTSIZE=10000
 setopt EXTENDED_HISTORY # add timestamps to history
 setopt APPEND_HISTORY # adds history
 setopt INC_APPEND_HISTORY SHARE_HISTORY  # adds history incrementally and share it across sessions
