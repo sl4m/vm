@@ -1,9 +1,5 @@
 ## Installation
 
-### Add your ssh keys
-
-  `ssh-add ~/.ssh/id_rsa`
-
 ### Define your Base Box
 
   `cp definitions/development-vm/definition.rb.example definitions/development-vm/definition.rb`
@@ -16,6 +12,14 @@
 
    Modify the settings to suit your needs.
 
+### Create your Vagrantfile
+
+Copy `Vagrantfile.example` as `Vagrantfile` or create your own.
+
+### Add your ssh keys
+
+  `ssh-add ~/.ssh/id_rsa`
+
 ### One line install (first time)
 
   `rake install`
@@ -24,10 +28,10 @@
 
   `rake reset`
 
-### After the box is set up and you modify chef recipies
+### After the box is set up and you modify chef recipes
 
   `rake vm:provision`
 
 #### Other Gotchas
 
-   `sudo dhclient` if your vm cannot connect to the internet
+   `sudo dhclient` if your vm cannot connect to the internet (this typically happens when you use different WiFi networks)
