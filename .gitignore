@@ -4,5 +4,5 @@
 .vagrant
 Vagrantfile
 cookbooks/git/files/default/.gitconfig
-definitions/development-vm/definition.rb
+definitions/**/definition.rb
 iso/
