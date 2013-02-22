@@ -3,7 +3,7 @@
 end
 
 # turn on trust authentication
-hba_conf = '/etc/postgresql/9.1/main/pg_hba.conf'
+hba_conf = '/etc/postgresql/9.2/main/pg_hba.conf'
 
 bash 'trust authentication' do
   code "sudo sed -i -e \"/local\\\\s\\+all\\\\s\\+all\\\\s\\+peer/c local\\\\tall\\\\tall\\\\ttrust\" #{hba_conf}"
