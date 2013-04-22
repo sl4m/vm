@@ -1,9 +1,9 @@
 require 'vagrant'
 
-desc 'Install the Base Box and VM.'
-task :install => ['box:create', 'vm:create']
+desc 'Build base box'
+task :install => ['box:create', 'vm:configure']
 
-desc 'Reset the Base Box and VM.'
+desc 'Reset the Base Box'
 task :reset => :install
 
 namespace :box do
@@ -28,44 +28,7 @@ namespace :box do
 end
 
 namespace :vm do
-  task :create => [:destroy, :up, :provision]
-
-  task :up => :configure do
-    sh 'vagrant up --no-provision'
-  end
-
-  task :provision => :configure do
-    sh 'vagrant provision'
-  end
-
-  task :destroy do
-    sh 'vagrant destroy -f' do; end
-  end
-
-  task :reload => [:down, :open]
-
-  desc 'Shutdown the VM'
-  task :down do
-    sh 'vagrant halt'
-  end
-
-  desc 'Open the VM'
-  task :open => [:up, :ssh]
-
-  task :ssh do
-    sh 'vagrant ssh'
-  end
-
-  desc 'Kill the VM'
-  task :kill do
-    sh "VBoxManage controlvm #{ENV['VM']} poweroff"
-  end
-
-  desc 'List all running VMs'
-  task :list do
-    sh 'VBoxManage list runningvms'
-  end
-
+  desc 'configure your VM'
   task :configure => [:git_configure]
 
   task :git_configure do

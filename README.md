@@ -12,7 +12,7 @@
 
    Modify the settings to suit your needs.
 
-### Create your Vagrantfile
+### Vagrantfile
 
 Copy `Vagrantfile.example` as `Vagrantfile` or create your own.
 
@@ -20,17 +20,18 @@ Copy `Vagrantfile.example` as `Vagrantfile` or create your own.
 
   `ssh-add ~/.ssh/id_rsa`
 
-### One line install (first time)
+### Build and configure your VM
 
   `rake install`
 
-### Reset the VM (after first time)
+### Learn the basic vagrant commands
 
-  `rake reset`
-
-### After the box is set up and you modify chef recipes
-
-  `rake vm:provision`
+```
+  vagrant up     #starts vagrant
+  vagrant ssh    #SSH into vagrant
+  vagrant reload #restarts vagrant
+  vagrant halt   #stops vagrant
+```
 
 #### Other Gotchas
 
