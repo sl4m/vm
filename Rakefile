@@ -3,8 +3,11 @@ require 'vagrant'
 desc 'Build base box'
 task :install => ['box:create', 'vm:configure']
 
+desc 'Rebuild using the Base Box'
+task :rebuild => 'box:rebuild'
+
 desc 'Reset the Base Box'
-task :reset => :install
+task :reset => 'box:reset'
 
 namespace :box do
   task :create => [:remove, :build, :export, :add]
@@ -24,6 +27,16 @@ namespace :box do
 
   task :add do
     sh 'vagrant box add skim-vm skim-vm.box'
+  end
+
+  task :destroy do
+    sh 'vagrant destroy'
+  end
+
+  task :reset => [:destroy, :create]
+
+  task :rebuild => :destroy do
+    sh 'vagrant up'
   end
 end
 
