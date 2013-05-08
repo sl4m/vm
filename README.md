@@ -1,20 +1,21 @@
 ## Installation
 
-### Define your Base Box
+### Define your Base Box (only works on Mac OSX/\*nix hosts)
 
   `cp definitions/development-vm/definition.rb.example definitions/development-vm/definition.rb`
 
 #### Default settings
 
-  * CPU Count: 4 - _If you do not have 4 cores, decrease this number._
-  * Memory: 8gb - _If you do not have more than 8gb of RAM, decrease this number._
-  * Hard Drive: 20gb
+  * CPU Count: 4 cores - _If you do not have 4 cores, decrease this number._
+  * Memory: 8GB - _If you do not have more than 8gb of RAM, decrease this number._
+  * Hard Drive: 20GB
 
    Modify the settings to suit your needs.
 
 ### Vagrantfile
 
-Copy `Vagrantfile.example` as `Vagrantfile` or create your own.
+  * Copy `Vagrantfile.example` as `Vagrantfile` or create your own.
+  * Uncomment recipes to suit your needs.
 
 ### Add your ssh keys
 
@@ -27,12 +28,12 @@ Copy `Vagrantfile.example` as `Vagrantfile` or create your own.
 ### Learn the basic vagrant commands
 
 ```
-  vagrant up     #starts vagrant
-  vagrant ssh    #SSH into vagrant
-  vagrant reload #restarts vagrant
-  vagrant halt   #stops vagrant
+  vagrant up     # starts vagrant
+  vagrant ssh    # SSH into vagrant
+  vagrant reload # restarts vagrant
+  vagrant halt   # stops vagrant
 ```
 
 #### Other Gotchas
 
-   `sudo dhclient` if your vm cannot connect to the internet (this typically happens when you use different WiFi networks)
+   `sudo dhclient` if your vm cannot connect to the internet (this typically happens when you switch from one network to another)

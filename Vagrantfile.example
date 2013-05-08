@@ -23,26 +23,29 @@ Vagrant::Config.run do |config|
     chef.add_recipe('ack')
 
     # Languages
-    chef.add_recipe('ruby')
-    chef.add_recipe('java')
-    chef.add_recipe('clojure')
-    chef.add_recipe('node')
-    chef.add_recipe('coffee_script')
-    chef.add_recipe('go')
+    #chef.add_recipe('ruby')
+    #chef.add_recipe('java')
+    #chef.add_recipe('clojure')
+    #chef.add_recipe('node')
+    #chef.add_recipe('coffee_script')
+    #chef.add_recipe('go')
 
     # Datastores
-    chef.add_recipe('redis')
-    chef.add_recipe('riak')
-    chef.add_recipe('mongodb')
-    chef.add_recipe('postgres')
-    chef.add_recipe('mysql')
-    chef.add_recipe('sqlite')
+    #chef.add_recipe('redis')
+    #chef.add_recipe('riak')
+    #chef.add_recipe('mongodb')
+    #chef.add_recipe('postgres')
+    #chef.add_recipe('mysql')
+    #chef.add_recipe('sqlite')
 
     # Search Engines
-    chef.add_recipe('elasticsearch')
+    #chef.add_recipe('elasticsearch')
+
+    # Messaging System
+    #chef.add_recipe('rabbitmq')
 
     # Headless browsers
-    chef.add_recipe('phantomjs')
+    #chef.add_recipe('phantomjs')
 
     chef.add_recipe('helper::cleanup')
   end
