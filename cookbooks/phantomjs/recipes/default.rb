@@ -1,6 +1,6 @@
 package 'libfontconfig1-dev'
 
-phantom_package = 'phantomjs-1.9.0-linux-x86_64'
+phantom_package = 'phantomjs-1.9.1-linux-x86_64'
 phantom_url = "https://phantomjs.googlecode.com/files/#{phantom_package}.tar.bz2"
 phantom_tar = Helper.home('phantomjs.tar.bz2')
 phantom_home = Helper.home('.phantomjs')
