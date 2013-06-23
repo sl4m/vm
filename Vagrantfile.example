@@ -9,6 +9,7 @@ Vagrant::Config.run do |config|
 
   #config.vm.network :hostonly, '10.11.12.13'
   #config.vm.share_folder('git', '/home/vagrant/git', '.', create: true, nfs: true)
+  config.vm.share_folder 'v-root', '/vagrant', '.', disabled: true
 
   config.vm.provision :chef_solo do |chef|
     chef.cookbooks_path = 'cookbooks'
