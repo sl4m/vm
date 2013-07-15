@@ -1,15 +1,14 @@
 # vi: set ft=ruby :
 
-Vagrant::Config.run do |config|
+Vagrant.configure('2') do |config|
   config.vm.box = 'skim-vm'
 
-  config.vm.forward_port 8080, 8080
+  config.vm.network :forwarded_port, host: 8080, guest: 8080
 
   config.ssh.forward_agent = true
 
-  #config.vm.network :hostonly, '10.11.12.13'
-  #config.vm.share_folder('git', '/home/vagrant/git', '.', create: true, nfs: true)
-  config.vm.share_folder 'v-root', '/vagrant', '.', disabled: true
+  config.vm.synced_folder ".", "/vagrant", disabled: true
+  #config.vm.synced_folder "git", "/home/vagrant/git", :nfs => true
 
   config.vm.provision :chef_solo do |chef|
     chef.cookbooks_path = 'cookbooks'
@@ -22,6 +21,7 @@ Vagrant::Config.run do |config|
     chef.add_recipe('vim')
     chef.add_recipe('tmux')
     chef.add_recipe('ack')
+    #chef.add_recipe('rbenv')
 
     # Languages
     #chef.add_recipe('ruby')

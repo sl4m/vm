@@ -2,9 +2,7 @@
 # Installing the virtualbox guest additions
 apt-get -y install dkms
 VBOX_VERSION=$(cat /home/vagrant/.vbox_version)
-cd /tmp
-wget http://download.virtualbox.org/virtualbox/$VBOX_VERSION/VBoxGuestAdditions_$VBOX_VERSION.iso
-mount -o loop VBoxGuestAdditions_$VBOX_VERSION.iso /mnt
+mount -o loop /home/vagrant/VBoxGuestAdditions_$VBOX_VERSION.iso /mnt
 sh /mnt/VBoxLinuxAdditions.run
 umount /mnt
 
@@ -27,18 +25,10 @@ apt-get -y install nfs-common
 apt-get -y update
 apt-get -y upgrade
 apt-get -y install linux-headers-$(uname -r) build-essential openssl libreadline6 libreadline6-dev curl git-core zlib1g zlib1g-dev libssl-dev libyaml-dev libsqlite3-dev sqlite3 libxml2-dev libxslt-dev autoconf libc6-dev ncurses-dev automake libtool bison pkg-config libgdbm-dev libffi-dev
-apt-get -y install ruby rubygems
+apt-get -y install ruby1.9.3
 apt-get clean
 
-# Installing rvm and latest ruby
-curl -L https://get.rvm.io | sudo bash -s stable
-sudo chown -R vagrant:admin /usr/local/rvm
-PATH=$PATH:/usr/local/rvm/bin
-source '/usr/local/rvm'
-rvm install 1.9.3
-
 # Installing chef & Puppet
-rvm use 1.9.3
 gem install chef --no-ri --no-rdoc
 
 # Installing vagrant keys

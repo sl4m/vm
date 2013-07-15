@@ -1,8 +1,11 @@
 *.box
 *.swp
+.DS_Store
 .rvmrc
 .vagrant
 Vagrantfile
 cookbooks/git/files/default/.gitconfig
 definitions/**/definition.rb
 iso/
+output-*/
+packer_cache/

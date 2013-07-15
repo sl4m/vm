@@ -1,5 +1,7 @@
 ## Installation
 
+1. Install [Vagrant](http://downloads.vagrantup.com/)
+
 ### Define your Base Box (only works on Mac OSX/\*nix hosts)
 
   `cp definitions/development-vm/definition.rb.example definitions/development-vm/definition.rb`
@@ -37,3 +39,5 @@
 #### Other Gotchas
 
    `sudo dhclient` if your vm cannot connect to the internet (this typically happens when you switch from one network to another)
+
+   If coming from 1.0.x version of Vagrant, `gem uninstall vagrant` to avoid conflicts with the newer binary package based Vagrant.

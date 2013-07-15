@@ -28,7 +28,6 @@ end
 bash 'build command-t' do
   code <<-EOH
   cd #{vim_dotfiles_dir}/vim/bundle/command-t/ruby/command-t
-  rvm use system
   ruby extconf.rb
   make clean
   make
