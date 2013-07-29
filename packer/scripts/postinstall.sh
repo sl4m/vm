@@ -1,4 +1,3 @@
-
 # Installing the virtualbox guest additions
 apt-get -y install dkms
 VBOX_VERSION=$(cat /home/vagrant/.vbox_version)
@@ -61,4 +60,8 @@ rm /lib/udev/rules.d/75-persistent-net-generator.rules
 
 echo "Adding a 2 sec delay to the interface up, to make the dhclient happy"
 echo "pre-up sleep 2" >> /etc/network/interfaces
+
+sed -i 's/set timeout.*$/set timeout=10/' /etc/grub.d/00_header
+sudo update-grub
+
 exit
