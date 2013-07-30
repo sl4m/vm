@@ -6,4 +6,4 @@ git_prompt_info() {
   echo "[%{$fg_bold[green]%}${user}@${ref#refs/heads/}%{$reset_color%}]"
 }
 
-export PS1='$(git_prompt_info)[${SSH_CONNECTION+"%{$fg_bold[green]%}%n@%m:"}%{$fg_bold[blue]%}%~%{$reset_color%}] '
+export PS1='$(git_prompt_info)[%{$fg_bold[blue]%}%~%{$reset_color%}] '

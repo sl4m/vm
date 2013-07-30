@@ -24,7 +24,7 @@ apt-get -y install nfs-common
 apt-get -y update
 apt-get -y upgrade
 apt-get -y install linux-headers-$(uname -r) build-essential openssl libreadline6 libreadline6-dev curl git-core zlib1g zlib1g-dev libssl-dev libyaml-dev libsqlite3-dev sqlite3 libxml2-dev libxslt-dev autoconf libc6-dev ncurses-dev automake libtool bison pkg-config libgdbm-dev libffi-dev
-apt-get -y install ruby1.9.3
+apt-get -y install ruby rubygems
 apt-get clean
 
 # Installing chef & Puppet

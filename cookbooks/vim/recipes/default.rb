@@ -1,6 +1,7 @@
 vimrc_dir = Helper.home('.vimrc')
 vim_dir = Helper.home('.vim')
 vim_dotfiles_dir = Helper.home('.vim_dotfiles')
+user_directory vim_dotfiles_dir
 
 package 'vim-nox'
 
