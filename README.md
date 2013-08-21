@@ -2,22 +2,22 @@
 
 1. Install [Vagrant](http://downloads.vagrantup.com/)
 
-### Define your Base Box (only works on Mac OSX/\*nix hosts)
+### Define your Base Box
 
-  `cp definitions/development-vm/definition.rb.example definitions/development-vm/definition.rb`
+  `cp packer/template.json.example packer/template.json`
 
-#### Default settings
+#### Default hardware settings
 
   * CPU Count: 4 cores - _If you do not have 4 cores, decrease this number._
-  * Memory: 8GB - _If you do not have more than 8gb of RAM, decrease this number._
+  * Memory: 4GB - _If you do not have more than 8gb of RAM, decrease this number._
   * Hard Drive: 20GB
 
-   Modify the settings to suit your needs.
+  Modify the settings to suit your needs. For VirtualBox, this would be under `disk_size`, `vboxmanage`, for VMWare, this would be under `disk_size`, `vmx_data`.
 
 ### Vagrantfile
 
   * Copy `Vagrantfile.example` as `Vagrantfile` or create your own.
-  * Uncomment recipes to suit your needs.
+  * Uncomment recipes that you want installed.
 
 ### Add your ssh keys
 
@@ -38,6 +38,6 @@
 
 #### Other Gotchas
 
-   `sudo dhclient` if your vm cannot connect to the internet (this typically happens when you switch from one network to another)
+  `sudo dhclient` if your vm cannot connect to the internet (this typically happens when you switch from one network to another).
 
-   If coming from 1.0.x version of Vagrant, `gem uninstall vagrant` to avoid conflicts with the newer binary package based Vagrant.
+  If coming from 1.0.x version of Vagrant, `gem uninstall vagrant` to avoid conflicts with the newer binary package based Vagrant.

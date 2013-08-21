@@ -5,7 +5,7 @@
 .vagrant
 Vagrantfile
 cookbooks/git/files/default/.gitconfig
-definitions/**/definition.rb
 iso/
 output-*/
+packer/template.json
 packer_cache/
