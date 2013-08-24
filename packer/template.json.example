@@ -4,67 +4,76 @@
       "type": "virtualbox",
       "boot_command": [
         "<esc><esc><enter><wait>",
-        "/install/vmlinuz noapic preseed/url=http://{{ .HTTPIP }}:{{ .HTTPPort }}/preseed.cfg <wait>",
-        "debian-installer=en_US auto locale=en_US kbd-chooser/method=us <wait>",
-        "hostname={{ .Name }} <wait>",
-        "fb=false debconf/frontend=noninteractive <wait>",
-        "keyboard-configuration/layout=USA keyboard-configuration/variant=USA console-setup/ask_detect=false <wait>",
-        "initrd=/install/initrd.gz -- <enter><wait>"
+        "/install/vmlinuz noapic preseed/url=http://{{ .HTTPIP }}:{{ .HTTPPort }}/preseed.cfg ",
+        "debian-installer=en_US auto locale=en_US kbd-chooser/method=us ",
+        "hostname={{ .Name }} ",
+        "fb=false debconf/frontend=noninteractive ",
+        "keyboard-configuration/modelcode=SKIP keyboard-configuration/layout=USA keyboard-configuration/variant=USA console-setup/ask_detect=false ",
+        "initrd=/install/initrd.gz -- <enter>"
       ],
-      "boot_wait": "4s",
+      "boot_wait": "5s",
       "disk_size": 20140,
       "guest_additions_path": "VBoxGuestAdditions_{{.Version}}.iso",
       "guest_os_type": "Ubuntu_64",
       "http_directory": "packer/preseed",
-      "iso_md5": "af5f788aee1b32c4b2634734309cc9e9",
+      "iso_checksum": "63b7c9474398295355f01f57a1657405ae85b1c21953c6c996bbb6374f07e3aa",
+      "iso_checksum_type": "sha256",
       "iso_url": "http://releases.ubuntu.com/12.04/ubuntu-12.04.2-server-amd64.iso",
-      "ssh_username": "vagrant",
+      "shutdown_command": "echo 'vagrant' | sudo -S shutdown -P now",
       "ssh_password": "vagrant",
       "ssh_port": 22,
-      "ssh_wait_timeout": "10000s",
-      "shutdown_command": "echo 'shutdown -P now' > shutdown.sh; echo 'vagrant'|sudo -S sh 'shutdown.sh'",
-      "virtualbox_version_file": ".vbox_version",
+      "ssh_username": "vagrant",
+      "ssh_wait_timeout": "20m",
       "vboxmanage": [
-        [ "modifyvm", "{{.Name}}", "--memory", "4096" ],
-        [ "modifyvm", "{{.Name}}", "--cpus", "4" ]
+        [
+          "modifyvm",
+          "{{.Name}}",
+          "--memory",
+          "4096"
+        ],
+        [
+          "modifyvm",
+          "{{.Name}}",
+          "--cpus",
+          "4"
+        ]
       ],
+      "virtualbox_version_file": ".vbox_version",
       "vm_name": "skim-vm"
     },
     {
       "type": "vmware",
       "boot_command": [
         "<esc><esc><enter><wait>",
-        "/install/vmlinuz noapic preseed/url=http://{{ .HTTPIP }}:{{ .HTTPPort }}/preseed.cfg <wait>",
-        "debian-installer=en_US auto locale=en_US kbd-chooser/method=us <wait>",
-        "hostname={{ .Name }} <wait>",
-        "fb=false debconf/frontend=noninteractive <wait>",
-        "keyboard-configuration/layout=USA keyboard-configuration/variant=USA console-setup/ask_detect=false <wait>",
-        "initrd=/install/initrd.gz -- <enter><wait>"
+        "/install/vmlinuz noapic preseed/url=http://{{ .HTTPIP }}:{{ .HTTPPort }}/preseed.cfg ",
+        "debian-installer=en_US auto locale=en_US kbd-chooser/method=us ",
+        "hostname={{ .Name }} ",
+        "fb=false debconf/frontend=noninteractive ",
+        "keyboard-configuration/modelcode=SKIP keyboard-configuration/layout=USA keyboard-configuration/variant=USA console-setup/ask_detect=false ",
+        "initrd=/install/initrd.gz -- <enter>"
       ],
-      "boot_wait": "4s",
+      "boot_wait": "5s",
       "disk_size": 20140,
       "guest_os_type": "ubuntu-64",
       "http_directory": "packer/preseed",
-      "iso_md5": "af5f788aee1b32c4b2634734309cc9e9",
+      "iso_checksum": "63b7c9474398295355f01f57a1657405ae85b1c21953c6c996bbb6374f07e3aa",
+      "iso_checksum_type": "sha256",
       "iso_url": "http://releases.ubuntu.com/12.04/ubuntu-12.04.2-server-amd64.iso",
-      "ssh_username": "vagrant",
+      "shutdown_command": "echo 'vagrant' | sudo -S shutdown -P now",
       "ssh_password": "vagrant",
       "ssh_port": 22,
-      "ssh_wait_timeout": "10000s",
-      "shutdown_command": "echo 'shutdown -P now' > shutdown.sh; echo 'vagrant'|sudo -S sh 'shutdown.sh'",
+      "ssh_username": "vagrant",
+      "ssh_wait_timeout": "20m",
       "vmx_data": {
+        "cpuid.coresPerSocket": "1",
         "memsize": "4096",
-        "numvcpus": "4",
-        "cpuid.coresPerSocket": "1"
+        "numvcpus": "4"
       }
     }
   ],
   "provisioners": [
     {
       "type": "shell",
-      "scripts": [
-        "packer/scripts/postinstall.sh"
-      ],
       "override": {
         "virtualbox": {
           "execute_command": "echo 'vagrant'|sudo -S sh '{{.Path}}'"
@@ -72,13 +81,16 @@
         "vmware": {
           "execute_command": "echo 'vagrant'|sudo -S sh '{{.Path}}'"
         }
-      }
+      },
+      "scripts": ["packer/scripts/postinstall.sh"]
     }
   ],
   "post-processors": [
     {
       "type": "vagrant",
+      "output": "skim-vm.box",
       "vagrantfile_template": "packer/post_processing/Vagrantfile.template"
     }
   ]
 }
+

@@ -1,6 +1,13 @@
-## Installation
+## Prerequisites
 
-1. Install [Vagrant](http://downloads.vagrantup.com/)
+* [Vagrant](http://downloads.vagrantup.com/) 1.2.x
+* [Packer^](http://www.packer.io/downloads.html) 0.3.4
+
+^ Packer is required if building a custom image.
+
+Note: `template.json.example` is based on `Packer 0.3.4`. Use accordingly.
+
+## Installation
 
 ### Define your Base Box
 
@@ -9,7 +16,7 @@
 #### Default hardware settings
 
   * CPU Count: 4 cores - _If you do not have 4 cores, decrease this number._
-  * Memory: 4GB - _If you do not have more than 8gb of RAM, decrease this number._
+  * Memory: 4GB - _If you do not have more than 4GB of RAM, decrease this number._
   * Hard Drive: 20GB
 
   Modify the settings to suit your needs. For VirtualBox, this would be under `disk_size`, `vboxmanage`, for VMWare, this would be under `disk_size`, `vmx_data`.
