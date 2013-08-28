@@ -23,7 +23,8 @@ namespace :box do
 
   task :debug_build do
     Rake::Task['box:remove'].invoke
-    sh 'PACKER_LOG=1 packer build --only=virtualbox packer/template.json'
+    ENV['PACKER_LOG'] = 'true'
+    sh 'packer build --only=virtualbox packer/template.json'
   end
 
   task :add do

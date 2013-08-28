@@ -3,6 +3,7 @@
 .DS_Store
 .rvmrc
 .vagrant
+crash.log
 Vagrantfile
 cookbooks/git/files/default/.gitconfig
 iso/
