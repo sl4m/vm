@@ -1,6 +1,7 @@
 vimrc_dir = Helper.home('.vimrc')
 vim_dir = Helper.home('.vim')
 vim_dotfiles_dir = Helper.home('.vim_dotfiles')
+user_directory vim_dotfiles_dir
 
 package 'vim-nox'
 
@@ -28,7 +29,6 @@ end
 bash 'build command-t' do
   code <<-EOH
   cd #{vim_dotfiles_dir}/vim/bundle/command-t/ruby/command-t
-  rvm use system
   ruby extconf.rb
   make clean
   make

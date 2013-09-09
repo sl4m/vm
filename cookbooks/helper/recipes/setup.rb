@@ -1,9 +1,5 @@
 package 'python-software-properties'
 
-bash 'add third party repositories' do
-  code 'sudo add-apt-repository ppa:pitti/postgresql'
-end
-
 bash 'sudo apt-get update' do
   code 'sudo apt-get update'
 end

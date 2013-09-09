@@ -1,86 +1,73 @@
-require 'vagrant'
+BOX_NAME  = 'skim-vm'
+ROOT_PATH = File.expand_path(File.dirname(__FILE__))
 
-desc 'Build base box'
-task :install => ['box:create', 'vm:configure']
+desc 'Builds the default box using packer, and provisions using vagrant'
+task :install => ['box:create', 'vm:start']
 
-desc 'Rebuild using the Base Box'
+desc 'Rebuilds from the existing default box'
 task :rebuild => 'box:rebuild'
 
-desc 'Reset the Base Box'
-task :reset => 'box:reset'
+desc 'Rebuilds the default box using packer, and provisions using vagrant'
+task :reinstall => :install
 
 namespace :box do
-  task :create => [:remove, :build, :export, :add]
+  task :create => [:destroy, :remove, :build, :add]
 
-  task :remove do
-    sh 'rm -rf skim-vm.box'
-    sh 'vagrant box remove skim-vm virtualbox' do; end
-  end
-
-  task :build do
-    sh 'veewee vbox build skim-vm --force'
-  end
-
-  task :export do
-    sh 'vagrant package --base skim-vm --output skim-vm.box'
-  end
-
-  task :add do
-    sh 'vagrant box add skim-vm skim-vm.box'
-  end
-
+  # destroys the current box
   task :destroy do
     sh 'vagrant destroy'
   end
 
-  task :reset => [:destroy, :create]
+  # removes the default box from the vagrant list
+  task :remove do
+    sh "vagrant box remove #{BOX_NAME} virtualbox" do; end
+  end
+
+  # builds the default box using packer
+  task :build do
+    sh 'packer build --force=true --only=virtualbox packer/template.json'
+  end
+
+  # adds the default box to the vagrant list
+  task :add do
+    sh "vagrant box add #{BOX_NAME} #{BOX_NAME}.box"
+  end
 
   task :rebuild => :destroy do
-    sh 'vagrant up'
+    Rake::Task['vm:start'].invoke
+  end
+
+  task :debug_build do
+    Rake::Task['box:destroy'].invoke
+    Rake::Task['box:remove'].invoke
+    ENV['PACKER_LOG'] = 'true'
+    Rake::Task['box:build'].invoke
   end
 end
 
 namespace :vm do
+  task :start => [:configure, :up]
+
   desc 'configure your VM'
   task :configure => [:git_configure]
 
   task :git_configure do
-    unless git_configured?
-      create_git_config_file
-    end
+    require "#{ROOT_PATH}/tasks/create_git_config"
+    Tasks::CreateGitConfig.new.execute
   end
 
-  def git_configured?
-    File.exists?(git_config_file)
+  desc 'start vm (with provisioning)'
+  task :up do
+    sh 'vagrant up'
   end
 
-  def create_git_config_file
-    print 'Please enter your full name (for Git config): '
-    @full_name = STDIN.gets.strip
-    print 'Please enter your email (for Git config): '
-    @email = STDIN.gets.strip
-    print 'Please enter your Github username (for Git config): '
-    @username = STDIN.gets.strip
-    require 'erb'
-    template_contents = File.open(git_config_template).read
-    git_config_contents = ERB.new(template_contents).result(binding)
-    FileUtils.mkpath(git_config_dir)
-    File.open(git_config_file, 'w') {|f| f.write(git_config_contents)}
+  desc 'start vm (no provisioning)'
+  task :fast do
+    sh 'vagrant up --no-provision'
   end
 
-  def git_cookbook
-    File.expand_path(File.join('..', 'cookbooks', 'git'), __FILE__)
-  end
-
-  def git_config_dir
-    File.join(git_cookbook, 'files', 'default')
-  end
-
-  def git_config_file
-    File.join(git_config_dir, '.gitconfig')
-  end
-
-  def git_config_template
-    File.join(git_cookbook, 'templates', 'default', '.gitconfig.erb')
+  desc 'shutdown vm'
+  task :down do
+    sh 'vagrant halt'
   end
 end
