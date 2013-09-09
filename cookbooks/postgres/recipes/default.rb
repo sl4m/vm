@@ -1,3 +1,10 @@
+bash 'add third party repositories' do
+  code <<-EOH
+  sudo add-apt-repository ppa:pitti/postgresql
+  sudo apt-get update
+  EOH
+end
+
 %w(libpq-dev postgresql-9.2).each do |p|
   package p
 end

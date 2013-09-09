@@ -1,6 +1,5 @@
 %w(
   .vbox_version
-  .veewee_version
   .bash_login
   .bash_logout
   .bash_history

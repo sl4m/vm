@@ -1,15 +1,19 @@
 # vi: set ft=ruby :
 
-Vagrant::Config.run do |config|
+Vagrant.configure('2') do |config|
   config.vm.box = 'skim-vm'
+  config.vm.provider 'virtualbox' do |v|
+    v.name = 'skim-vm'
+  end
 
-  config.vm.forward_port 8080, 8080
+  config.vm.network :forwarded_port, host: 8080, guest: 8080
+
+  # forward SSH port for pair programming
+  #config.vm.network :forwarded_port, host: 2223, guest: 22
 
   config.ssh.forward_agent = true
 
-  #config.vm.network :hostonly, '10.11.12.13'
-  #config.vm.share_folder('git', '/home/vagrant/git', '.', create: true, nfs: true)
-  config.vm.share_folder 'v-root', '/vagrant', '.', disabled: true
+  #config.vm.synced_folder "git", "/home/vagrant/git", :nfs => true
 
   config.vm.provision :chef_solo do |chef|
     chef.cookbooks_path = 'cookbooks'
@@ -22,21 +26,24 @@ Vagrant::Config.run do |config|
     chef.add_recipe('vim')
     chef.add_recipe('tmux')
     chef.add_recipe('ack')
+    #chef.add_recipe('chruby')
+    #chef.add_recipe('ruby_build')
 
     # Languages
-    #chef.add_recipe('ruby')
     #chef.add_recipe('java')
     #chef.add_recipe('clojure')
-    #chef.add_recipe('node')
     #chef.add_recipe('coffee_script')
     #chef.add_recipe('go')
+    #chef.add_recipe('node')
+    #chef.add_recipe('ruby')
 
     # Datastores
+    #chef.add_recipe('memcached')
+    #chef.add_recipe('mongodb')
+    #chef.add_recipe('mysql')
+    #chef.add_recipe('postgres')
     #chef.add_recipe('redis')
     #chef.add_recipe('riak')
-    #chef.add_recipe('mongodb')
-    #chef.add_recipe('postgres')
-    #chef.add_recipe('mysql')
     #chef.add_recipe('sqlite')
 
     # Search Engines
