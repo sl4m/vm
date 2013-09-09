@@ -1,47 +1,47 @@
-ROOT_PATH = File.expand_path(File.dirname(__FILE__))
 BOX_NAME  = 'skim-vm'
+ROOT_PATH = File.expand_path(File.dirname(__FILE__))
 
-desc 'Build base box'
+desc 'Builds the default box using packer, and provisions using vagrant'
 task :install => ['box:create', 'vm:start']
 
-desc 'Rebuild using the Base Box'
+desc 'Rebuilds from the existing default box'
 task :rebuild => 'box:rebuild'
 
-desc 'Reset the Base Box'
-task :reset => 'box:reset'
+desc 'Rebuilds the default box using packer, and provisions using vagrant'
+task :reinstall => :install
 
 namespace :box do
-  task :create => [:remove, :build, :add]
+  task :create => [:destroy, :remove, :build, :add]
 
-  task :remove do
-    sh "vagrant box remove #{BOX_NAME} virtualbox" do; end
-  end
-
-  task :build do
-    sh 'packer build --only=virtualbox packer/template.json'
-  end
-
-  task :debug_build do
-    Rake::Task['box:remove'].invoke
-    ENV['PACKER_LOG'] = 'true'
-    sh 'packer build --only=virtualbox packer/template.json'
-  end
-
-  task :add do
-    sh "vagrant box add #{BOX_NAME} #{BOX_NAME}.box"
-  end
-
+  # destroys the current box
   task :destroy do
     sh 'vagrant destroy'
   end
 
-  task :rebuild => :destroy do
-    sh 'vagrant up'
+  # removes the default box from the vagrant list
+  task :remove do
+    sh "vagrant box remove #{BOX_NAME} virtualbox" do; end
   end
 
-  task :reset do
+  # builds the default box using packer
+  task :build do
+    sh 'packer build --force=true --only=virtualbox packer/template.json'
+  end
+
+  # adds the default box to the vagrant list
+  task :add do
+    sh "vagrant box add #{BOX_NAME} #{BOX_NAME}.box"
+  end
+
+  task :rebuild => :destroy do
+    Rake::Task['vm:start'].invoke
+  end
+
+  task :debug_build do
     Rake::Task['box:destroy'].invoke
-    Rake::Task['box:create'].invoke
+    Rake::Task['box:remove'].invoke
+    ENV['PACKER_LOG'] = 'true'
+    Rake::Task['box:build'].invoke
   end
 end
 
