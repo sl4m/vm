@@ -13,7 +13,7 @@
 
   `cp packer/template.json.example packer/template.json`
 
-Note: `packer/template.json.example` is based on `Packer 0.3.6`.
+Note: `packer/template.json.example` is based on `Packer 0.3.7`.
 
 #### Default hardware settings (adjust as necessary)
 
