@@ -32,7 +32,7 @@ Note: `packer/template.json.example` is based on `Packer 0.3.7`.
 
   `rake install`
 
-### Learn the basic vagrant commands
+## Learn the basic vagrant commands
 
 ```
   vagrant up      # starts vagrant
