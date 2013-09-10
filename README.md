@@ -1,9 +1,9 @@
 ## Tested against
 
 * Host: Mac OS X 10.8.4
-* VirtualBox 4.2.16
-* [Vagrant](http://downloads.vagrantup.com/) ~> 1.3.0
-* [Packer^](http://www.packer.io/downloads.html) ~> 0.3.6
+* VirtualBox 4.2.18
+* [Vagrant](http://downloads.vagrantup.com/) ~> 1.3.1
+* [Packer^](http://www.packer.io/downloads.html) ~> 0.3.7
 
 ^ Packer is required to build the custom Ubuntu image.
 
