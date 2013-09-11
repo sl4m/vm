@@ -1,7 +1,7 @@
 ## Tested against
 
 * Host: Mac OS X 10.8.4
-* Virtualization Providers: VirtualBox 4.2.18, VMWare Fusion 6.0.0 (1296151)
+* Virtualization Providers: VirtualBox 4.2.18, VMware Fusion 6.0.0 (1296151)
 * [Packer^](http://www.packer.io/downloads.html) ~> 0.3.7
 * [Vagrant](http://downloads.vagrantup.com/) ~> 1.3.1
 
@@ -11,7 +11,9 @@
 
 ### Define your Base Box
 
-  `cp packer/template.json.example packer/template.json`
+```
+cp packer/template.json.example packer/template.json
+```
 
 Note: `packer/template.json.example` is based on `Packer 0.3.7`.
 
@@ -21,7 +23,7 @@ Note: `packer/template.json.example` is based on `Packer 0.3.7`.
   * Memory: 4GB
   * Hard Drive: 20GB
 
-  Modify the settings to suit your needs. VirtualBox settings are under `disk_size`, `vboxmanage` and VMWare settings are under `disk_size`, `vmx_data`.
+  Modify the settings to suit your needs. VirtualBox settings are under `disk_size`, `vboxmanage` and VMware settings are under `disk_size`, `vmx_data`.
 
 ### Vagrantfile
 
