@@ -28,7 +28,7 @@ Note: `packer/template.json.example` is based on `Packer 0.3.7`.
 ### Vagrantfile
 
   * Copy `Vagrantfile.example` as `Vagrantfile` or create your own.
-  * Uncomment recipes that you want installed.
+  * Configure and uncomment recipes that you want cooked.
 
 ### One click install command
 

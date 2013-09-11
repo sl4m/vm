@@ -2,18 +2,21 @@
 
 Vagrant.configure('2') do |config|
   config.vm.box = 'skim-vm'
+
   config.vm.provider 'virtualbox' do |v|
     v.name = 'skim-vm'
   end
 
-  config.vm.network :forwarded_port, host: 8080, guest: 8080
+  # forward guest port to access your web application
+  #config.vm.network :forwarded_port, host: 8080, guest: 8080
 
-  # forward SSH port for pair programming (vagrant no longer opens 2222 by default)
+  # forward guest SSH port (vagrant no longer opens 2222 by default)
   #config.vm.network :forwarded_port, host: 2223, guest: 22
 
   config.ssh.forward_agent = true
 
-  #config.vm.synced_folder "git", "/home/vagrant/git", :nfs => true
+  # share a folder with your host via nfs
+  #config.vm.synced_folder "git", "/home/vagrant/dir_to_share", :nfs => true
 
   config.vm.provision :chef_solo do |chef|
     chef.cookbooks_path = 'cookbooks'
