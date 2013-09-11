@@ -1,8 +1,6 @@
 BOX_NAME  = 'skim-vm'
 ROOT_PATH = File.expand_path(File.dirname(__FILE__))
 
-require "#{ROOT_PATH}/lib/box_configurator"
-
 namespace :default do
   task :install => ['box:create', 'vm:start']
   task :rebuild => 'box:rebuild'
@@ -25,7 +23,7 @@ namespace :virtualbox do
   task :up => ['settings', 'vm:up']
 
   task :settings do
-    CONFIGURATOR = BoxConfigurator.new(:virtualbox)
+    CONFIGURATOR = build_configurator(:virtualbox)
   end
 end
 
@@ -46,7 +44,7 @@ namespace :vmware do
   task :up => ['settings', 'vm:up']
 
   task :settings do
-    CONFIGURATOR = BoxConfigurator.new(:vmware)
+    CONFIGURATOR = build_configurator(:vmware)
   end
 end
 
@@ -115,4 +113,9 @@ end
 
 def check_configurator
   raise 'CONFIGURATOR not set!' unless defined? CONFIGURATOR
+end
+
+def build_configurator(type)
+  require "#{ROOT_PATH}/lib/box_configurator"
+  BoxConfigurator.new(type)
 end
