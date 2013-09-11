@@ -13,8 +13,8 @@
       ],
       "boot_wait": "5s",
       "disk_size": 20140,
-      "guest_additions_path": "VBoxGuestAdditions_{{.Version}}.iso",
       "guest_os_type": "Ubuntu_64",
+      "headless": true,
       "http_directory": "packer/preseed",
       "iso_checksum": "61d5e67c70d97b33c13537461a0b153b41304ef412bb0e9d813bb157068c3c65",
       "iso_checksum_type": "sha256",
@@ -37,9 +37,7 @@
           "--cpus",
           "4"
         ]
-      ],
-      "virtualbox_version_file": ".vbox_version",
-      "vm_name": "skim-vm"
+      ]
     },
     {
       "type": "vmware",
@@ -54,7 +52,9 @@
       ],
       "boot_wait": "5s",
       "disk_size": 20140,
+      "disk_type_id": "2",
       "guest_os_type": "ubuntu-64",
+      "headless": true,
       "http_directory": "packer/preseed",
       "iso_checksum": "61d5e67c70d97b33c13537461a0b153b41304ef412bb0e9d813bb157068c3c65",
       "iso_checksum_type": "sha256",
@@ -64,6 +64,8 @@
       "ssh_port": 22,
       "ssh_username": "vagrant",
       "ssh_wait_timeout": "20m",
+      "tools_upload_flavor": "linux",
+      "tools_upload_path": "VMWareTools.iso",
       "vmx_data": {
         "cpuid.coresPerSocket": "1",
         "memsize": "4096",
@@ -88,7 +90,7 @@
   "post-processors": [
     {
       "type": "vagrant",
-      "output": "skim-vm.box",
+      "output": "skim-vm-{{.Provider}}.box",
       "vagrantfile_template": "packer/post_processing/Vagrantfile.template"
     }
   ]

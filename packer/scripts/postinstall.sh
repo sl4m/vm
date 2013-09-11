@@ -1,13 +1,25 @@
-# Installing the virtualbox guest additions
-apt-get -y install dkms
-VBOX_VERSION=$(cat /home/vagrant/.vbox_version)
-mount -o loop /home/vagrant/VBoxGuestAdditions_$VBOX_VERSION.iso /mnt
-sh /mnt/VBoxLinuxAdditions.run
-umount /mnt
+apt-get -y update
+apt-get -y upgrade
+apt-get -y install linux-headers-$(uname -r) build-essential
 
-rm VBoxGuestAdditions_$VBOX_VERSION.iso
+if test -f .vbox_version ; then
+  echo "installing VirtualBox Guest Additions..."
+  apt-get -y install dkms
+  mount -o loop /home/vagrant/VBoxGuestAdditions.iso /mnt
+  sh /mnt/VBoxLinuxAdditions.run
+  umount /mnt
 
-# Setup sudo to allow no-password sudo for "admin"
+  rm VBoxGuestAdditions.iso
+else
+  echo "installing VMWare Tools..."
+  mount -o loop /home/vagrant/VMWareTools.iso /mnt
+  tar xzvf /mnt/VMwareTools-*.tar.gz -C /tmp/
+  /tmp/vmware-tools-distrib/vmware-install.pl -d
+  umount /mnt
+  /usr/bin/vmware-config-tools.pl -d
+fi
+
+echo "setup sudo to allow no-password sudo for 'admin'"
 groupadd -r admin
 usermod -a -G admin vagrant
 cp /etc/sudoers /etc/sudoers.orig
@@ -16,18 +28,12 @@ sed -i -e '/Defaults\s\+env_reset/a Defaults\tenv_keep+=SSH_AUTH_SOCK' /etc/sudo
 sed -i -e '/Defaults\s\+env_reset/a Defaults\tenv_keep+=PATH' /etc/sudoers
 sed -i -e 's/%admin ALL=(ALL) ALL/%admin ALL=NOPASSWD:ALL/g' /etc/sudoers
 
-# Install NFS client
-apt-get -y install nfs-common
-
-# Apt-install various things necessary for Ruby, guest additions,
-# etc., and remove optional things to trim down the machine.
-apt-get -y update
-apt-get -y upgrade
-apt-get -y install linux-headers-$(uname -r) build-essential openssl libreadline6 libreadline6-dev curl git-core zlib1g zlib1g-dev libssl-dev libyaml-dev libsqlite3-dev sqlite3 libxml2-dev libxslt-dev autoconf libc6-dev ncurses-dev automake libtool bison pkg-config libgdbm-dev libffi-dev
-apt-get -y install ruby rubygems
+# apt-get install various things necessary (e.g., NFS client, Ruby)
+# and remove optional things to trim down the machine.
+apt-get -y install nfs-common openssl libreadline6 libreadline6-dev curl git-core zlib1g zlib1g-dev libssl-dev libyaml-dev libsqlite3-dev sqlite3 libxml2-dev libxslt-dev autoconf libc6-dev ncurses-dev automake libtool bison pkg-config libgdbm-dev libffi-dev ruby rubygems
 apt-get clean
 
-# Installing chef & Puppet
+# Installing chef
 gem install chef --no-ri --no-rdoc
 
 # Installing vagrant keys
