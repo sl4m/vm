@@ -1,6 +1,6 @@
 zsh_file 'chruby'
 
-chruby_version = '0.3.6'
+chruby_version = '0.3.7'
 
 bash 'install chruby' do
   code <<-EOH
