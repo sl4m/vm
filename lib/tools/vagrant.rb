@@ -13,7 +13,7 @@ module Tools
     end
 
     def down_command
-      "vagrant halt #{provider_flag}"
+      "vagrant halt"
     end
 
     def remove_command(box_name)
@@ -26,6 +26,10 @@ module Tools
 
     def up_command
       "vagrant up #{provider_flag}"
+    end
+
+    def up_with_provision_command
+      "#{up_command} --provision"
     end
 
     private

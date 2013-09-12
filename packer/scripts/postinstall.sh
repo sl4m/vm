@@ -8,7 +8,6 @@ if test -f .vbox_version ; then
   mount -o loop /home/vagrant/VBoxGuestAdditions.iso /mnt
   sh /mnt/VBoxLinuxAdditions.run
   umount /mnt
-
   rm VBoxGuestAdditions.iso
 else
   echo "installing VMWare Tools..."
@@ -16,6 +15,7 @@ else
   tar xzvf /mnt/VMwareTools-*.tar.gz -C /tmp/
   /tmp/vmware-tools-distrib/vmware-install.pl -d
   umount /mnt
+  rm VMWareTools.iso
   /usr/bin/vmware-config-tools.pl -d
 fi
 

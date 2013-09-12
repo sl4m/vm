@@ -1,51 +1,42 @@
 BOX_NAME  = 'skim-vm'
 ROOT_PATH = File.expand_path(File.dirname(__FILE__))
 
+provider_builder = lambda do |provider|
+  namespace provider do
+    desc "Only builds the default #{provider} using packer"
+    task :build => ['settings', 'default:create']
+
+    desc "Builds the default #{provider} using packer, and provisions using vagrant"
+    task :install => ['settings', 'default:install']
+
+    desc "Reinstalls the default #{provider} using packer, and provisions using vagrant"
+    task :reinstall => :install
+
+    desc "Rebuilds from the existing default #{provider}"
+    task :rebuild => ['settings', 'default:rebuild']
+
+    desc "Start the #{provider} vm with provisioning"
+    task :provision => ['settings', 'vm:provision']
+
+    desc "Start the #{provider} vm (no provisioning)"
+    task :up => ['settings', 'vm:up']
+
+    desc "Shuts down #{provider} vm"
+    task :down => ['settings', 'vm:down']
+
+    task :settings do
+      CONFIGURATOR = build_configurator(provider)
+    end
+  end
+end
+
+provider_builder.call(:virtualbox)
+provider_builder.call(:vmware)
+
 namespace :default do
+  task :create  => 'box:create'
   task :install => ['box:create', 'vm:start']
   task :rebuild => 'box:rebuild'
-end
-
-namespace :virtualbox do
-  desc 'Builds the default virtualbox using packer, and provisions using vagrant'
-  task :install => ['settings', 'default:install']
-
-  desc 'Rebuilds the default virtualbox using packer, and provisions using vagrant'
-  task :reinstall => :install
-
-  desc 'Rebuilds from the existing default virtualbox'
-  task :rebuild => ['settings', 'default:rebuild']
-
-  desc 'Shuts down virtualbox vm'
-  task :down => ['settings', 'vm:down']
-
-  desc 'Start the virtualbox vm'
-  task :up => ['settings', 'vm:up']
-
-  task :settings do
-    CONFIGURATOR = build_configurator(:virtualbox)
-  end
-end
-
-namespace :vmware do
-  desc 'Builds the default vmware using packer, and provisions using vagrant'
-  task :install => ['settings', 'default:install']
-
-  desc 'Rebuilds the default vmware using packer, and provisions using vagrant'
-  task :reinstall => :install
-
-  desc 'Rebuilds from the existing default vmware'
-  task :rebuild => ['settings', 'default:rebuild']
-
-  desc 'Shuts down vmware vm'
-  task :down => ['settings', 'vm:down']
-
-  desc 'Start the virtualbox vm'
-  task :up => ['settings', 'vm:up']
-
-  task :settings do
-    CONFIGURATOR = build_configurator(:vmware)
-  end
 end
 
 namespace :box do
@@ -58,7 +49,7 @@ namespace :box do
     end
   end
 
-  # removes the default box from the vagrant list
+  # removes the default box from the vagrant box list
   task :remove do
     sh vagrant.remove_command(BOX_NAME) do; end
   end
@@ -68,7 +59,7 @@ namespace :box do
     sh packer.build_command
   end
 
-  # adds the default box to the vagrant list
+  # adds the default box to the vagrant box list
   task :add do
     sh vagrant.add_command(BOX_NAME)
   end
@@ -85,6 +76,10 @@ namespace :vm do
   end
 
   task :start => [:configure, :up]
+
+  task :provision do
+    sh vagrant.up_with_provision_command
+  end
 
   task :up do
     sh vagrant.up_command
