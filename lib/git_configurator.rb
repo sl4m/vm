@@ -28,7 +28,7 @@ class GitConfigurator
   end
 
   def git_cookbook
-    File.expand_path(File.join('..', '..', 'cookbooks', 'git'), __FILE__)
+    File.expand_path(File.join('..', '..', 'cookbooks', 'default', 'git'), __FILE__)
   end
 
   def git_config_dir
