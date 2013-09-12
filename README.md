@@ -29,6 +29,7 @@ Note: `packer/template.json.example` is based on `Packer 0.3.7`.
 
   * Copy `Vagrantfile.example` as `Vagrantfile` or create your own.
   * Configure and uncomment recipes that you want cooked.
+  * Optionally create your own recipes and place in the `cookbooks/custom` directory
 
 ### One click install command
 

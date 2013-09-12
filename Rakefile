@@ -88,6 +88,10 @@ namespace :vm do
   task :down do
     sh vagrant.down_command
   end
+
+  task :reload do
+    sh vagrant.reload_command
+  end
 end
 
 def packer

@@ -9,11 +9,15 @@ module Tools
     end
 
     def destroy_command
-      "vagrant destroy"
+      'vagrant destroy'
     end
 
     def down_command
-      "vagrant halt"
+      'vagrant halt'
+    end
+
+    def reload_command
+      'vagrant reload'
     end
 
     def remove_command(box_name)

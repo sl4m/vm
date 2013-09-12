@@ -5,7 +5,8 @@
 .vagrant
 crash.log
 Vagrantfile
-cookbooks/git/files/default/.gitconfig
+cookbooks/custom/
+cookbooks/default/git/files/default/.gitconfig
 iso/
 output-*/
 packer/template.json
