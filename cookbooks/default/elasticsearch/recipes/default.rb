@@ -2,7 +2,7 @@
   package p
 end
 
-elasticsearch_package = 'elasticsearch-0.20.6'
+elasticsearch_package = 'elasticsearch-0.90.5'
 elasticsearch_url = "http://download.elasticsearch.org/elasticsearch/elasticsearch/#{elasticsearch_package}.zip"
 elasticsearch_zip = Helper.home('elasticsearch.zip')
 elasticsearch_home = Helper.home('.elasticsearch')
