@@ -25,7 +25,7 @@ directory '/var/log/redis' do
   owner 'redis'
 end
 
-bash 'initialize init deamon script' do
+bash 'initialize init daemon script' do
   code 'sudo update-rc.d redis-server defaults'
 end
 

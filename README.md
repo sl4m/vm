@@ -34,7 +34,8 @@ Note: `packer/template.json.example` is based on `Packer 0.3.7`.
 ### One click install command
 
 ```
-rake install
+rake virtualbox:install
+rake vmware:install
 ```
 
 ## Learn the basic vagrant commands
