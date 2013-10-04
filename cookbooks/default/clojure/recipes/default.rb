@@ -20,7 +20,7 @@ user_directory lein_self_install_dir
 
 user_remote_file lein_bin do
   mode 0755
-  source 'https://raw.github.com/technomancy/leiningen/preview/bin/lein'
+  source 'https://raw.github.com/technomancy/leiningen/stable/bin/lein'
 end
 
 user_bash 'install leiningen' do
