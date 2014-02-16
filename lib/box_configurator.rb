@@ -10,12 +10,12 @@ class BoxConfigurator
   def setup_provider(provider)
     case provider
     when :virtualbox
-      @packer           = 'virtualbox'
+      @packer           = 'virtualbox-iso'
       @vagrant          = 'virtualbox'
       @vagrant_box      = 'virtualbox'
       @vagrant_provider = 'virtualbox'
     when :vmware
-      @packer           = 'vmware'
+      @packer           = 'vmware-iso'
       @vagrant          = 'vmware'
       @vagrant_box      = 'vmware_desktop'
       @vagrant_provider = 'vmware_fusion'
