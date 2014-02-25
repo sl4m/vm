@@ -16,4 +16,5 @@ end
 
 home_directory 'tmp' do
   action :delete
+  recursive true
 end

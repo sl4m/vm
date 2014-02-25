@@ -35,10 +35,9 @@ Vagrant.configure('2') do |config|
     # Languages
     #chef.add_recipe('java')
     #chef.add_recipe('clojure')
-    #chef.add_recipe('npm')
-    #chef.add_recipe('coffee_script') # requires npm recipe
-    #chef.add_recipe('go')
     #chef.add_recipe('node')
+    #chef.add_recipe('coffee_script') # requires node recipe
+    #chef.add_recipe('go')
     #chef.add_recipe('ruby')
 
     # Datastores
