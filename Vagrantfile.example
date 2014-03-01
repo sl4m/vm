@@ -10,10 +10,8 @@ Vagrant.configure('2') do |config|
   # forward guest port to access your web application
   #config.vm.network :forwarded_port, host: 8080, guest: 8080
 
-  # forward guest SSH port (vagrant no longer opens 2222 by default)
-  #config.vm.network :forwarded_port, host: 2223, guest: 22
-
-  config.ssh.forward_agent = true
+  config.ssh.forward_agent    = true
+  #config.ssh.private_key_path = '~/.ssh/id_rsa'
 
   # share a folder with your host via nfs
   #config.vm.synced_folder "git", "/home/vagrant/dir_to_share", :nfs => true
