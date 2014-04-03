@@ -1,16 +1,13 @@
-bash 'add third party repositories' do
-  code <<-EOH
-  sudo add-apt-repository ppa:pitti/postgresql
-  sudo apt-get update
-  EOH
+apt_sources_list_file 'postgresql.list'
+
+bash 'apt key/apt-get update' do
+  code Helper.apt_key('https://www.postgresql.org/media/keys/ACCC4CF8.asc')
 end
 
-%w(libpq-dev postgresql-9.2).each do |p|
-  package p
-end
+package 'postgresql-9.3'
 
 # turn on trust authentication
-hba_conf = '/etc/postgresql/9.2/main/pg_hba.conf'
+hba_conf = '/etc/postgresql/9.3/main/pg_hba.conf'
 
 bash 'trust authentication' do
   code "sudo sed -i -e \"/local\\\\s\\+all\\\\s\\+all\\\\s\\+peer/c local\\\\tall\\\\tall\\\\ttrust\" #{hba_conf}"
@@ -33,4 +30,3 @@ end
 bash 'restart postgres with new user and permissions' do
   code 'sudo /etc/init.d/postgresql restart'
 end
-

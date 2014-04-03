@@ -16,6 +16,13 @@ class ::Helper
   def self.display
     ':99.0'
   end
+
+  def self.apt_key(trusted_key_url)
+    <<-EOH
+    wget --quiet -O - #{trusted_key_url} | sudo apt-key add -
+    sudo apt-get update
+    EOH
+  end
 end
 
 ENV['HOME'] = Helper.home
@@ -80,6 +87,12 @@ class ::Chef
     class HomeDirectory < UserDirectory
       def initialize(name, run_context=nil)
         super(Helper.home(name), run_context)
+      end
+    end
+
+    class AptSourcesListFile < CookbookFile
+      def initialize(name, run_context=nil)
+        super("/etc/apt/sources.list.d/#{name}", run_context)
       end
     end
 

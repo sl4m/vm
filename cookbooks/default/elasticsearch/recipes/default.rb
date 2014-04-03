@@ -1,14 +1,10 @@
-%w(curl unzip).each do |p|
-  package p
-end
-
-elasticsearch_package = 'elasticsearch-0.90.5'
-elasticsearch_url = "http://download.elasticsearch.org/elasticsearch/elasticsearch/#{elasticsearch_package}.zip"
-elasticsearch_zip = Helper.home('elasticsearch.zip')
+elasticsearch_package = 'elasticsearch-1.1.0'
+elasticsearch_url = "https://download.elasticsearch.org/elasticsearch/elasticsearch/#{elasticsearch_package}.tar.gz"
+elasticsearch_tar = Helper.home('elasticsearch.tar.gz')
 elasticsearch_home = Helper.home('.elasticsearch')
 elasticsearch_unpacked_path = Helper.home(elasticsearch_package)
 
-user_remote_file elasticsearch_zip do
+user_remote_file elasticsearch_tar do
   source elasticsearch_url
   mode '0644'
 end
@@ -19,14 +15,14 @@ user_directory elasticsearch_home do
 end
 
 user_bash 'unpack elasticsearch' do
-  code "unzip #{elasticsearch_zip} -d #{Helper.home}"
+  code "tar -xzvf #{elasticsearch_tar} -C #{Helper.home}"
 end
 
 user_bash 'move elasticsearch' do
   code "mv #{elasticsearch_unpacked_path} #{elasticsearch_home}"
 end
 
-user_file elasticsearch_zip do
+user_file elasticsearch_tar do
   action :delete
 end
 

@@ -17,7 +17,7 @@ user_directory phantom_home do
 end
 
 user_bash 'unpack phantomjs' do
-  code "tar xvjf #{phantom_tar} -C #{Helper.home}"
+  code "tar -xvjf #{phantom_tar} -C #{Helper.home}"
 end
 
 user_bash 'move phantomjs' do

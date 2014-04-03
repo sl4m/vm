@@ -1,18 +1,7 @@
-bash 'adds raring repositories to /etc/apt/sources.list' do
-  Helper.user
-  version = 'raring'
-  sources_list = '/etc/apt/sources.list'
-  repositories = <<-EOH
-  deb http://us.archive.ubuntu.com/ubuntu/ #{version} main restricted
-  deb-src http://us.archive.ubuntu.com/ubuntu/ #{version} main restricted
-  EOH
+apt_sources_list_file 'rabbitmq.list'
 
-  code <<-EOH
-  echo '#{repositories}' | sudo tee -a #{sources_list}
-  sudo apt-get update
-  EOH
-
-  not_if "cat #{sources_list} | grep #{version}"
+bash 'apt key/apt-get update' do
+  code Helper.apt_key('http://www.rabbitmq.com/rabbitmq-signing-key-public.asc')
 end
 
 package 'rabbitmq-server'
