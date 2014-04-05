@@ -36,13 +36,9 @@ apt-get clean
 # Installing chef
 gem install chef --no-ri --no-rdoc
 
-# Installing vagrant keys
+# Create .ssh directory
 mkdir /home/vagrant/.ssh
 chmod 700 /home/vagrant/.ssh
-cd /home/vagrant/.ssh
-wget --no-check-certificate 'https://raw.github.com/mitchellh/vagrant/master/keys/vagrant.pub' -O authorized_keys
-chmod 600 /home/vagrant/.ssh/authorized_keys
-chown -R vagrant /home/vagrant/.ssh
 
 # Remove items used for building, since they aren't needed anymore
 apt-get -y remove linux-headers-$(uname -r)
@@ -69,6 +65,6 @@ dd if=/dev/zero of=/EMPTY bs=1M
 rm -f /EMPTY
 
 sed -i 's/set timeout.*$/set timeout=10/' /etc/grub.d/00_header
-sudo update-grub
+update-grub
 
 exit

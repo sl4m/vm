@@ -1,4 +1,7 @@
 {
+  "variables": {
+    "ssh_public_key": ""
+  },
   "builders": [
     {
       "type": "virtualbox-iso",
@@ -85,6 +88,24 @@
         }
       },
       "scripts": ["packer/scripts/postinstall.sh"]
+    },
+    {
+      "type": "shell",
+      "override": {
+        "virtualbox-iso": {
+          "execute_command": "echo 'vagrant'|sudo -S sh '{{.Path}}'"
+        },
+        "vmware-iso": {
+          "execute_command": "echo 'vagrant'|sudo -S sh '{{.Path}}'"
+        }
+      },
+      "inline": [
+        "echo '{{user `ssh_public_key`}}' > /home/vagrant/.ssh/authorized_keys",
+        "chmod 600 /home/vagrant/.ssh/authorized_keys",
+        "chown -R vagrant /home/vagrant/.ssh",
+        "sed -i -e 's/#PasswordAuthentication no/PasswordAuthentication no/g' /etc/ssh/sshd_config",
+        "sudo service ssh restart"
+      ]
     }
   ],
   "post-processors": [

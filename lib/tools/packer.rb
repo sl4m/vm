@@ -5,7 +5,7 @@ module Tools
     end
 
     def build_command
-      "packer build --force=true --only=#{configurator.packer} packer/template.json"
+      "packer build --force=true --only=#{configurator.packer} -var 'ssh_public_key=#{configurator.ssh_public_key}' packer/template.json"
     end
 
     private

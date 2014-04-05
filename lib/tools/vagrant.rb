@@ -21,7 +21,7 @@ module Tools
     end
 
     def remove_command(box_name)
-      "vagrant box remove #{box_name} #{configurator.vagrant_box}"
+      "vagrant box remove #{box_name} #{provider_flag}"
     end
 
     def status_command

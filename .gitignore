@@ -3,10 +3,10 @@
 .DS_Store
 .rvmrc
 .vagrant
-crash.log
 Vagrantfile
 cookbooks/custom/
 cookbooks/default/git/files/default/.gitconfig
+crash.log
 iso/
 output-*/
 packer/template.json

@@ -3,13 +3,13 @@ ROOT_PATH = File.expand_path(File.dirname(__FILE__))
 
 provider_builder = lambda do |provider|
   namespace provider do
-    desc "Only builds the default #{provider} using packer"
+    desc "Only builds the default #{provider} using packer."
     task :build => ['settings', 'default:create']
 
-    desc "Builds the default #{provider} using packer, and provisions using vagrant"
+    desc "Builds the default #{provider} using packer, and provisions using vagrant."
     task :install => ['settings', 'default:install']
 
-    desc "Reinstalls the default #{provider} using packer, and provisions using vagrant"
+    desc "Reinstalls the default #{provider} using packer, and provisions using vagrant."
     task :reinstall => :install
 
     desc "Rebuilds from the existing default #{provider}"
@@ -116,5 +116,5 @@ end
 
 def build_configurator(type)
   require "#{ROOT_PATH}/lib/box_configurator"
-  BoxConfigurator.new(type)
+  BoxConfigurator.new(type, ENV['VAGRANT_PUBLIC_KEY'])
 end
