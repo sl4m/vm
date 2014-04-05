@@ -26,7 +26,7 @@ user_bash "link #{vim_dir}" do
   not_if "test -e #{vim_dir}"
 end
 
-user_bash 'build command-t' do
+bash 'build command-t' do
   code <<-EOH
   cd #{vim_dotfiles_dir}/vim/bundle/command-t/ruby/command-t
   ruby extconf.rb
