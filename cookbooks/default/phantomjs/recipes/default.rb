@@ -1,4 +1,4 @@
-package 'libfontconfig1-dev'
+apt_package 'libfontconfig1-dev'
 
 phantom_package = 'phantomjs-1.9.7-linux-x86_64'
 phantom_url = "https://bitbucket.org/ariya/phantomjs/downloads/#{phantom_package}.tar.bz2"

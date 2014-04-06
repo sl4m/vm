@@ -3,7 +3,7 @@ vim_dir = Helper.home('.vim')
 vim_dotfiles_dir = Helper.home('.vim_dotfiles')
 user_directory vim_dotfiles_dir
 
-package 'vim-nox'
+apt_package 'vim-nox'
 
 git vim_dotfiles_dir do
   repository 'https://github.com/sl4m/vim_dotfiles.git'

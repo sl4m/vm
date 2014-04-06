@@ -1,3 +1,3 @@
 %w(mcrypt libmcrypt-dev).each do |p|
-  package p
+  apt_package p
 end

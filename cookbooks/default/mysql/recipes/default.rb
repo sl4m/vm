@@ -1,3 +1,3 @@
 %w(libmysqlclient-dev mysql-server mysql-client libmysql-ruby).each do |p|
-  package p
+  apt_package p
 end

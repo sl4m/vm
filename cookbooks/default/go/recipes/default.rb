@@ -1,1 +1,1 @@
-package 'golang'
+apt_package 'golang'

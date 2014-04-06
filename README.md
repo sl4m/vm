@@ -1,9 +1,9 @@
 ## Tested against
 
 * Host: Mac OS X 10.8.4, Ubuntu 12.04.4 LTS
-* Virtualization Providers: VirtualBox 4.3.6, VMware Fusion 6.0.0 (1296151)
+* Virtualization Providers: VirtualBox 4.3.6, VMware Fusion 6.0.2 (1398658)
 * [Packer^](http://www.packer.io/downloads.html) ~> 0.5.2
-* [Vagrant](http://downloads.vagrantup.com/) ~> 1.4.3
+* [Vagrant](http://downloads.vagrantup.com/) ~> 1.5.2
 
 (^) Packer is required to build the custom Ubuntu image.
 

@@ -1,1 +1,1 @@
-package 'memcached'
+apt_package 'memcached'

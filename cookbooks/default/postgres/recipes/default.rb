@@ -4,7 +4,7 @@ bash 'apt key/apt-get update' do
   code Helper.apt_key('https://www.postgresql.org/media/keys/ACCC4CF8.asc')
 end
 
-package 'postgresql-9.3'
+apt_package 'postgresql-9.3'
 
 # turn on trust authentication
 hba_conf = '/etc/postgresql/9.3/main/pg_hba.conf'

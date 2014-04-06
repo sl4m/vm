@@ -1,4 +1,4 @@
-package 'python-software-properties'
+apt_package 'python-software-properties'
 
 bash 'sudo apt-get update' do
   code 'sudo apt-get update'

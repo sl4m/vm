@@ -1,4 +1,4 @@
-package 'zsh'
+apt_package 'zsh'
 
 home_directory '.zsh'
 

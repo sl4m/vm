@@ -4,4 +4,4 @@ bash 'apt key/apt-get update' do
   code Helper.apt_key('http://www.rabbitmq.com/rabbitmq-signing-key-public.asc')
 end
 
-package 'rabbitmq-server'
+apt_package 'rabbitmq-server'

@@ -1,1 +1,1 @@
-package 'mongodb'
+apt_package 'mongodb'
