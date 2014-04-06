@@ -21,7 +21,7 @@ module Tools
     end
 
     def remove_command(box_name)
-      "vagrant box remove #{box_name} #{provider_flag}"
+      "vagrant box remove #{box_name} --provider=#{configurator.vagrant_box}"
     end
 
     def status_command
@@ -29,7 +29,7 @@ module Tools
     end
 
     def up_command
-      "vagrant up #{provider_flag}"
+      "vagrant up --provider=#{configurator.vagrant_provider}"
     end
 
     def up_with_provision_command
@@ -37,10 +37,6 @@ module Tools
     end
 
     private
-
-    def provider_flag
-      "--provider=#{configurator.vagrant_provider}"
-    end
 
     attr_reader :configurator
   end
