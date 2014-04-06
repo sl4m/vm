@@ -19,7 +19,7 @@ class ::Helper
 
   def self.apt_key(trusted_key_url)
     <<-EOH
-    wget --quiet -O - #{trusted_key_url} | sudo apt-key add -
+    wget --quiet -O - '#{trusted_key_url}' | sudo apt-key add -
     sudo apt-get update
     EOH
   end
