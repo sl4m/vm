@@ -11,3 +11,7 @@ end
 apt_package 'nodejs' do
   action :upgrade
 end
+
+user_cookbook_file '.npmrc'
+
+zsh_file 'npm'
