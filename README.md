@@ -1,9 +1,9 @@
 ## Tested against
 
-* Host: Mac OS X 10.8.4, Ubuntu 12.04.4 LTS
-* Virtualization Providers: VirtualBox 4.3.6, VMware Fusion 6.0.2 (1398658)
+* Host: Mac OS X 10.8.4, Ubuntu 14.04 LTS
+* Virtualization Providers: VirtualBox 4.3.6, VMware Fusion 6.0.3 (1747349)
 * [Packer^](http://www.packer.io/downloads.html) ~> 0.5.2
-* [Vagrant](http://downloads.vagrantup.com/) ~> 1.5.2
+* [Vagrant](http://downloads.vagrantup.com/) ~> 1.5.3
 
 (^) Packer is required to build the custom Ubuntu image.
 
@@ -17,18 +17,16 @@ cp packer/template.json.example packer/template.json
 
 Note: `packer/template.json.example` is based on `Packer 0.5.2`.
 
-#### Default hardware settings (adjust as necessary)
+#### Default hardware settings (adjust variables as necessary)
 
-  * CPU Count: 4 cores
-  * Memory: 4GB
-  * Hard Drive: 20GB
-
-  Modify the settings to suit your needs. VirtualBox settings are under `disk_size`, `vboxmanage` and VMware settings are under `disk_size`, `vmx_data`.
+  * `cpu_cores`: 4 cores
+  * `memory`: 4096 MB
+  * `disk_size`: 20140 MB
 
 ### Vagrantfile
 
   * Copy `Vagrantfile.example` as `Vagrantfile` or create your own.
-  * Configure and uncomment recipes that you want cooked.
+  * Configure and uncomment recipes that you want to cook.
   * Optionally create your own recipes and place in the `cookbooks/custom` directory
 
 ### One click install command
@@ -38,7 +36,7 @@ rake virtualbox:install
 rake vmware:install
 ```
 
-## Learn the basic vagrant commands
+## The basic vagrant commands
 
 ```
   vagrant up      # starts vagrant
