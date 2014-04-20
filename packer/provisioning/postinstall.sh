@@ -30,7 +30,7 @@ sed -i -e 's/%admin ALL=(ALL) ALL/%admin ALL=NOPASSWD:ALL/g' /etc/sudoers
 
 # apt-get install various things necessary (e.g., NFS client, Ruby)
 # and remove optional things to trim down the machine.
-apt-get -y install nfs-common openssl libreadline6 libreadline6-dev curl git-core zlib1g zlib1g-dev libssl-dev libyaml-dev libsqlite3-dev sqlite3 libxml2-dev libxslt-dev autoconf libc6-dev ncurses-dev automake libtool bison pkg-config libgdbm-dev libffi-dev ruby rubygems
+apt-get -y install nfs-common openssl libreadline6 libreadline6-dev curl git-core zlib1g zlib1g-dev libssl-dev libyaml-dev libsqlite3-dev sqlite3 libxml2-dev libxslt1-dev autoconf libc6-dev libncurses5-dev automake libtool bison pkg-config libgdbm-dev libffi-dev ruby-dev
 apt-get clean
 
 # Installing chef
@@ -51,7 +51,7 @@ rm /var/lib/dhcp/*
 # Make sure Udev doesn't block our network
 # http://6.ptmc.org/?p=164
 echo "cleaning up udev rules"
-rm /etc/udev/rules.d/70-persistent-net.rules
+rm -rf /etc/udev/rules.d/70-persistent-net.rules
 mkdir /etc/udev/rules.d/70-persistent-net.rules
 rm -rf /dev/.udev/
 rm /lib/udev/rules.d/75-persistent-net-generator.rules
@@ -64,7 +64,9 @@ echo "Zeroing device to make space..."
 dd if=/dev/zero of=/EMPTY bs=1M
 rm -f /EMPTY
 
-sed -i 's/set timeout.*$/set timeout=10/' /etc/grub.d/00_header
-update-grub
+# Sync to ensure that the delete completes before this moves on.
+sync
+sync
+sync
 
 exit
