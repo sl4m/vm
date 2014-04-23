@@ -11,8 +11,8 @@ git "#{zsh_files_dir}/zsh-syntax-highlighting" do
 end
 
 zsh_file 'zsh-syntax-highlighting'
-
 zsh_file 'prompt'
+zsh_file 'ssh'
 
 user_cookbook_file '.zshrc'
 
