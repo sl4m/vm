@@ -36,3 +36,9 @@ export EDITOR=vim
 
 # Load other config files
 for config_file ($HOME/.zsh/*.zsh(.N)) source $config_file
+
+if [ -z "$TMUX" ]; then
+  symlink_ssh_auth_sock
+else
+  export_ssh_auth_sock
+fi
