@@ -30,3 +30,5 @@ end
 bash 'restart postgres with new user and permissions' do
   code 'sudo /etc/init.d/postgresql restart'
 end
+
+zsh_file 'postgresql'
