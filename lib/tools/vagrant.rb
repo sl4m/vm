@@ -25,7 +25,7 @@ module Tools
     end
 
     def status_command
-      "vagrant status | grep #{configurator.vagrant_provider}"
+      "vagrant status | grep #{configurator.vagrant_provider} | grep -v 'not created'"
     end
 
     def up_command
