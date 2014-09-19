@@ -56,3 +56,5 @@ sudo dhclient
 2. If you're coming from 1.0.x version of Vagrant, `gem uninstall vagrant` to avoid conflicts with the newer binary package based Vagrant.
 
 3. You received the message: "Error creating VM: VBoxManage error: VBoxManage: error: Machine settings file <path_to_vbox> already exists". Installation was left in a bad state. Open VirtualBox, stop and remove the existing VM. Delete this vbox in your VirtualBox directory and re-run the command that failed.
+
+4. On VMware, if HGFS kernel module could not be found, you'll need to re-install VMwareTools.
