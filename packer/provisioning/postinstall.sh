@@ -15,7 +15,6 @@ else
   tar xzvf /mnt/VMwareTools-*.tar.gz -C /tmp/
   /tmp/vmware-tools-distrib/vmware-install.pl -d
   umount /mnt
-  rm VMWareTools.iso
   /usr/bin/vmware-config-tools.pl -d
 fi
 
