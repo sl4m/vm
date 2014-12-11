@@ -17,7 +17,7 @@
     "ssh_username": "vagrant",
     "ssh_wait_timeout": "20m",
     "sudo": "echo 'vagrant'|sudo -S sh",
-    "vm_name": "skim-vm"
+    "vm_name": "vm"
   },
   "builders": [
     {
@@ -130,7 +130,7 @@
   "post-processors": [
     {
       "type": "vagrant",
-      "output": "skim-vm-{{.Provider}}.box",
+      "output": "vm-{{.Provider}}.box",
       "vagrantfile_template": "packer/post_processing/Vagrantfile.template"
     }
   ]

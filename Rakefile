@@ -1,4 +1,4 @@
-BOX_NAME  = 'skim-vm'
+BOX_NAME  = 'vm'
 ROOT_PATH = File.expand_path(File.dirname(__FILE__))
 
 provider_builder = lambda do |provider|

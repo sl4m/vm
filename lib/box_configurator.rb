@@ -1,5 +1,5 @@
 class BoxConfigurator
-  DEFAULT_SSH_PUBLIC_KEY = 'packer/keys/skim-vm.pub'
+  DEFAULT_SSH_PUBLIC_KEY = 'packer/keys/vm.pub'
 
   def initialize(provider, ssh_public_key=nil)
     @provider       = provider
