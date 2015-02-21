@@ -4,10 +4,10 @@ bash 'apt key/apt-get update' do
   code Helper.apt_key('https://www.postgresql.org/media/keys/ACCC4CF8.asc')
 end
 
-apt_package 'postgresql-9.3'
+apt_package 'postgresql-9.4'
 
 # turn on trust authentication
-hba_conf = '/etc/postgresql/9.3/main/pg_hba.conf'
+hba_conf = '/etc/postgresql/9.4/main/pg_hba.conf'
 
 bash 'trust authentication' do
   code "sudo sed -i -e \"/local\\\\s\\+all\\\\s\\+all\\\\s\\+peer/c local\\\\tall\\\\tall\\\\ttrust\" #{hba_conf}"
