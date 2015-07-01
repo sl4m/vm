@@ -1,3 +1,7 @@
-user_cookbook_file '.gemrc'
+cookbook_file Helper.home('.gemrc') do
+  owner Helper.user
+end
 
-zsh_file 'ruby'
+cookbook_file Helper.home('.zsh/ruby.zsh') do
+  owner Helper.user
+end

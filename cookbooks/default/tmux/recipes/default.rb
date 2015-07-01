@@ -1,3 +1,5 @@
 apt_package 'tmux'
 
-user_cookbook_file '.tmux.conf'
+cookbook_file Helper.home('.tmux.conf') do
+  owner Helper.user
+end

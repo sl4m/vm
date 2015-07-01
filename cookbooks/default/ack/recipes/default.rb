@@ -1,4 +1,6 @@
 apt_package 'ack-grep'
 
-user_cookbook_file '.ackrc'
+cookbook_file Helper.home('.ackrc') do
+  owner Helper.user
+end
 

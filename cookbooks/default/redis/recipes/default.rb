@@ -1,32 +1,38 @@
-redis_package = 'redis-2.8.8'
-redis_url = "http://download.redis.io/releases/#{redis_package}.tar.gz"
-redis_tar = Helper.home('redis.tar.gz')
-redis_home = Helper.home('.redis')
+redis_package       = 'redis-2.8.8'
+redis_url           = "http://download.redis.io/releases/#{redis_package}.tar.gz"
+redis_tar           = Helper.home('redis.tar.gz')
+redis_home          = Helper.home('.redis')
 redis_unpacked_path = Helper.home(redis_package)
 
-user_remote_file redis_tar do
+remote_file redis_tar do
+  owner Helper.user
   source redis_url
   mode '0644'
 end
 
-user_directory redis_home do
+directory redis_home do
+  owner Helper.user
   action :delete
   recursive true
 end
 
-user_bash 'unpack redis' do
+bash 'unpack redis' do
+  user Helper.user
   code "tar -xzvf #{redis_tar} -C #{Helper.home}"
 end
 
-user_bash 'move redis' do
+bash 'move redis' do
+  user Helper.user
   code "mv #{redis_unpacked_path} #{redis_home}"
 end
 
-user_file redis_tar do
+file redis_tar do
+  owner Helper.user
   action :delete
 end
 
-user_bash 'install redis' do
+bash 'install redis' do
+  user Helper.user
   code <<-EOH
   cd #{redis_home}/
   make

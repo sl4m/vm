@@ -9,12 +9,14 @@
   .sudo_as_admin_successful
   .zlogin
 ).each do |f|
-  home_file f do
+  file Helper.home(f) do
+    owner Helper.user
     action :delete
   end
 end
 
-home_directory 'tmp' do
+directory Helper.home('tmp') do
+  owner Helper.user
   action :delete
   recursive true
 end

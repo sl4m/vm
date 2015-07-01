@@ -1,4 +1,4 @@
-apt_sources_list_file 'postgresql.list'
+cookbook_file '/etc/apt/sources.list.d/postgresql.list'
 
 bash 'apt key/apt-get update' do
   code Helper.apt_key('https://www.postgresql.org/media/keys/ACCC4CF8.asc')
@@ -31,4 +31,6 @@ bash 'restart postgres with new user and permissions' do
   code 'sudo /etc/init.d/postgresql restart'
 end
 
-zsh_file 'postgresql'
+cookbook_file Helper.home('.zsh/postgresql.zsh') do
+  owner Helper.user
+end

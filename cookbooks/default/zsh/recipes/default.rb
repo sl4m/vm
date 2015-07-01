@@ -1,6 +1,8 @@
 apt_package 'zsh'
 
-home_directory '.zsh'
+directory Helper.home('.zsh') do
+  owner Helper.user
+end
 
 zsh_files_dir = Helper.home('.zsh')
 
@@ -10,11 +12,21 @@ git "#{zsh_files_dir}/zsh-syntax-highlighting" do
   action :sync
 end
 
-zsh_file 'zsh-syntax-highlighting'
-zsh_file 'prompt'
-zsh_file 'ssh'
+cookbook_file Helper.home('.zsh/zsh-syntax-highlighting.zsh') do
+  owner Helper.user
+end
 
-user_cookbook_file '.zshrc'
+cookbook_file Helper.home('.zsh/prompt.zsh') do
+  owner Helper.user
+end
+
+cookbook_file Helper.home('.zsh/ssh.zsh') do
+  owner Helper.user
+end
+
+cookbook_file Helper.home('.zshrc') do
+  owner Helper.user
+end
 
 bash 'make ZSH the default login shell' do
   code "sudo chsh -s `which zsh` #{Helper.user}"

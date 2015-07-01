@@ -1,30 +1,39 @@
-lein_dir = Helper.home('.lein')
-lein_bin_dir = File.join(lein_dir, 'bin')
+lein_dir              = Helper.home('.lein')
+lein_bin_dir          = File.join(lein_dir, 'bin')
 lein_self_install_dir = File.join(lein_dir, 'self-installs')
-lein_bin = File.join(lein_dir, 'bin', 'lein')
+lein_bin              = File.join(lein_dir, 'bin', 'lein')
 
-user_directory lein_bin_dir do
+directory lein_bin_dir do
+  owner Helper.user
   recursive true
 end
 
-user_file lein_bin do
+file lein_bin do
+  owner Helper.user
   action :delete
 end
 
-user_directory lein_self_install_dir do
+directory lein_self_install_dir do
+  owner Helper.user
   action :delete
   recursive true
 end
 
-user_directory lein_self_install_dir
+directory lein_self_install_dir do
+  owner Helper.user
+end
 
-user_remote_file lein_bin do
+remote_file lein_bin do
+  owner Helper.user
   mode 0755
   source 'https://raw.github.com/technomancy/leiningen/stable/bin/lein'
 end
 
-user_bash 'install leiningen' do
+bash 'install leiningen' do
+  user Helper.user
   code "#{lein_bin} self-install"
 end
 
-zsh_file 'leiningen'
+cookbook_file Helper.home('.zsh/leiningen.zsh') do
+  owner Helper.user
+end

@@ -1,1 +1,3 @@
-user_cookbook_file '.gitconfig'
+cookbook_file Helper.home('.gitconfig') do
+  owner Helper.user
+end

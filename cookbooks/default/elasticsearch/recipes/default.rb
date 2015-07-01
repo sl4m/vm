@@ -1,32 +1,39 @@
-elasticsearch_package = 'elasticsearch-1.1.0'
-elasticsearch_url = "https://download.elasticsearch.org/elasticsearch/elasticsearch/#{elasticsearch_package}.tar.gz"
-elasticsearch_tar = Helper.home('elasticsearch.tar.gz')
-elasticsearch_home = Helper.home('.elasticsearch')
+elasticsearch_package       = 'elasticsearch-1.1.0'
+elasticsearch_url           = "https://download.elasticsearch.org/elasticsearch/elasticsearch/#{elasticsearch_package}.tar.gz"
+elasticsearch_tar           = Helper.home('elasticsearch.tar.gz')
+elasticsearch_home          = Helper.home('.elasticsearch')
 elasticsearch_unpacked_path = Helper.home(elasticsearch_package)
 
-user_remote_file elasticsearch_tar do
+remote_file elasticsearch_tar do
+  owner Helper.user
   source elasticsearch_url
   mode '0644'
 end
 
-user_directory elasticsearch_home do
+directory elasticsearch_home do
+  owner Helper.user
   action :delete
   recursive true
 end
 
-user_bash 'unpack elasticsearch' do
+bash 'unpack elasticsearch' do
+  user Helper.user
   code "tar -xzvf #{elasticsearch_tar} -C #{Helper.home}"
 end
 
-user_bash 'move elasticsearch' do
+bash 'move elasticsearch' do
+  user Helper.user
   code "mv #{elasticsearch_unpacked_path} #{elasticsearch_home}"
 end
 
-user_file elasticsearch_tar do
+file elasticsearch_tar do
+  owner Helper.user
   action :delete
 end
 
-zsh_file 'elasticsearch'
+cookbook_file Helper.home('.zsh/elasticsearch.zsh') do
+  owner Helper.user
+end
 
 cookbook_file File.join(elasticsearch_home, 'elasticsearch.yml') do
   owner Helper.user

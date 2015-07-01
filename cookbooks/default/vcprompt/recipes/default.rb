@@ -1,8 +1,11 @@
-home_directory '.bin'
+directory Helper.home('.bin') do
+  owner Helper.user
+end
 
 vcprompt_exec = "#{Helper.home('.bin')}/vcprompt"
 
-user_bash 'install vcprompt' do
+bash 'install vcprompt' do
+  user Helper.user
   code <<-EOH
   curl -sL https://github.com/djl/vcprompt/raw/master/bin/vcprompt > #{vcprompt_exec}
   chmod 755 #{vcprompt_exec}

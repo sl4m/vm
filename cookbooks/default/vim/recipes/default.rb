@@ -1,7 +1,10 @@
-vimrc_dir = Helper.home('.vimrc')
-vim_dir = Helper.home('.vim')
+vimrc_dir        = Helper.home('.vimrc')
+vim_dir          = Helper.home('.vim')
 vim_dotfiles_dir = Helper.home('.vim_dotfiles')
-user_directory vim_dotfiles_dir
+
+directory vim_dotfiles_dir do
+  owner Helper.user
+end
 
 apt_package 'vim-nox'
 
@@ -12,14 +15,16 @@ git vim_dotfiles_dir do
   enable_submodules true
 end
 
-user_bash "link #{vimrc_dir}" do
+bash "link #{vimrc_dir}" do
+  user Helper.user
   code <<-EOH
   ln -s #{vim_dotfiles_dir}/vimrc #{vimrc_dir}
   EOH
   not_if "test -e #{vimrc_dir}"
 end
 
-user_bash "link #{vim_dir}" do
+bash "link #{vim_dir}" do
+  user Helper.user
   code <<-EOH
   ln -s #{vim_dotfiles_dir}/vim #{vim_dir}
   EOH

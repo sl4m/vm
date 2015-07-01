@@ -1,7 +1,12 @@
-zsh_file 'ruby_build'
+cookbook_file Helper.home('.zsh/ruby_build.zsh') do
+  owner Helper.user
+end
 
 ruby_build_dir = Helper.home('.ruby_build')
-user_directory ruby_build_dir
+
+directory ruby_build_dir do
+  owner Helper.user
+end
 
 git ruby_build_dir do
   repository 'https://github.com/sstephenson/ruby-build.git'
