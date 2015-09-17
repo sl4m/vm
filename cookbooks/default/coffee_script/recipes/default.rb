@@ -1,3 +1,3 @@
 bash 'install Coffee Script' do
-  code 'npm install -g coffee-script'
+  code "#{Helper.home('.bin')}/npm install -g coffee-script"
 end
