@@ -20,10 +20,6 @@ cookbook_file Helper.home('.zsh/prompt.zsh') do
   owner Helper.user
 end
 
-cookbook_file Helper.home('.zsh/ssh.zsh') do
-  owner Helper.user
-end
-
 cookbook_file Helper.home('.zshrc') do
   owner Helper.user
 end
