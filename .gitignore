@@ -9,5 +9,6 @@ cookbooks/default/git/files/default/.gitconfig
 crash.log
 iso/
 output-*/
+packer/keys
 packer/template.json
 packer_cache/

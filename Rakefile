@@ -1,4 +1,6 @@
 BOX_NAME  = 'vm'
+DEFAULT_SSH_PATH = 'packer/keys'
+DEFAULT_SSH_PUBLIC_KEY = "#{DEFAULT_SSH_PATH}/vm.pub"
 ROOT_PATH = File.expand_path(File.dirname(__FILE__))
 
 provider_builder = lambda do |provider|
@@ -24,8 +26,8 @@ provider_builder = lambda do |provider|
     desc "Shuts down #{provider} vm"
     task :down => ['settings', 'vm:down']
 
-    task :settings do
-      CONFIGURATOR = build_configurator(provider)
+    task :settings => ['setup_ssh'] do
+      BOX_CONFIGURATOR = box_configurator(provider)
     end
   end
 end
@@ -94,11 +96,23 @@ namespace :vm do
   end
 end
 
+desc "Generate vm specific public/private key pair"
+task :setup_ssh do
+  if !ENV['VAGRANT_PUBLIC_KEY'] && !File.exists?(DEFAULT_SSH_PUBLIC_KEY)
+    require "#{ROOT_PATH}/lib/tools/ssh"
+    SshKeyGenerator.new(DEFAULT_SSH_PATH).execute
+  end
+end
+
+def default_ssh_public_key
+  File.read(DEFAULT_SSH_PUBLIC_KEY).strip
+end
+
 def packer
   @packer ||= (
     check_configurator
     require "#{ROOT_PATH}/lib/tools/packer"
-    Tools::Packer.new(CONFIGURATOR)
+    Tools::Packer.new(BOX_CONFIGURATOR)
   )
 end
 
@@ -106,15 +120,15 @@ def vagrant
   @vagrant ||= (
     check_configurator
     require "#{ROOT_PATH}/lib/tools/vagrant"
-    Tools::Vagrant.new(CONFIGURATOR)
+    Tools::Vagrant.new(BOX_CONFIGURATOR)
   )
 end
 
 def check_configurator
-  raise 'CONFIGURATOR not set!' unless defined? CONFIGURATOR
+  raise 'BOX_CONFIGURATOR not set!' unless defined? BOX_CONFIGURATOR
 end
 
-def build_configurator(type)
+def box_configurator(type)
   require "#{ROOT_PATH}/lib/box_configurator"
-  BoxConfigurator.new(type, ENV['VAGRANT_PUBLIC_KEY'])
+  BoxConfigurator.new(type, ENV['VAGRANT_PUBLIC_KEY'] || default_ssh_public_key)
 end

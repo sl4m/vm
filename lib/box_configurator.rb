@@ -1,7 +1,7 @@
 class BoxConfigurator
-  DEFAULT_SSH_PUBLIC_KEY = 'packer/keys/vm.pub'
+  attr_reader :ssh_public_key
 
-  def initialize(provider, ssh_public_key=nil)
+  def initialize(provider, ssh_public_key)
     @provider       = provider
     @ssh_public_key = ssh_public_key
   end
@@ -20,10 +20,6 @@ class BoxConfigurator
 
   def vagrant_provider
     options[:vagrant_provider]
-  end
-
-  def ssh_public_key
-    @ssh_public_key || default_ssh_public_key
   end
 
   private
@@ -49,9 +45,5 @@ class BoxConfigurator
         }
       end
     )
-  end
-
-  def default_ssh_public_key
-    File.read(DEFAULT_SSH_PUBLIC_KEY).strip
   end
 end
