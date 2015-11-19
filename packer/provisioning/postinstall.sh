@@ -32,9 +32,6 @@ sed -i -e 's/%admin ALL=(ALL) ALL/%admin ALL=NOPASSWD:ALL/g' /etc/sudoers
 apt-get -y install nfs-common openssl libreadline6 libreadline6-dev curl git-core zlib1g zlib1g-dev libssl-dev libyaml-dev libsqlite3-dev sqlite3 libxml2-dev libxslt1-dev autoconf libc6-dev libncurses5-dev automake libtool bison pkg-config libgdbm-dev libffi-dev ruby-dev
 apt-get clean
 
-# Installing chef
-gem install chef --no-ri --no-rdoc
-
 # Create .ssh directory
 mkdir /home/vagrant/.ssh
 chmod 700 /home/vagrant/.ssh
