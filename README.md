@@ -1,7 +1,7 @@
 ## Tested against
 
-* Host: Mac OS X 10.10.5, Ubuntu 14.04 LTS
-* Virtualization Providers: VirtualBox 5.0.4, VMware Fusion 7.1.2 (2779224)
+* Host: Mac OS X 10.11.1, Ubuntu 14.04 LTS
+* Virtualization Providers: VirtualBox 5.0.4, VMware Fusion 7.1.3
 * [Packer^](http://www.packer.io/downloads.html) ~> 0.8.6
 * [Vagrant](http://downloads.vagrantup.com/) ~> 1.7.4
 
