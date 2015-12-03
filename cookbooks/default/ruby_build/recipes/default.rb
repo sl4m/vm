@@ -6,9 +6,12 @@ ruby_build_dir = Helper.home('.ruby_build')
 
 directory ruby_build_dir do
   owner Helper.user
+  group Helper.group
 end
 
 git ruby_build_dir do
+  user Helper.user
+  group Helper.group
   repository 'https://github.com/sstephenson/ruby-build.git'
   reference 'master'
   action :sync

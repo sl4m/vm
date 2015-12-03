@@ -15,6 +15,7 @@ end
 
 bash 'unpack chruby' do
   user Helper.user
+  group Helper.group
   code "tar -xzvf #{chruby_tar} -C #{Helper.home}"
 end
 
@@ -32,5 +33,6 @@ end
 
 bash 'touch ~/.ruby-version' do
   user Helper.user
+  group Helper.group
   code 'touch ~/.ruby-version'
 end

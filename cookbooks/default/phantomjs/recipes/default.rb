@@ -20,11 +20,13 @@ end
 
 bash 'unpack phantomjs' do
   user Helper.user
+  group Helper.group
   code "tar -xvjf #{phantom_tar} -C #{Helper.home}"
 end
 
 bash 'move phantomjs' do
   user Helper.user
+  group Helper.group
   code "mv #{phantom_unpacked_path} #{phantom_home}"
 end
 
@@ -35,4 +37,5 @@ end
 
 cookbook_file Helper.home('.zsh/phantomjs.zsh') do
   owner Helper.user
+  group Helper.group
 end

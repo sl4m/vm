@@ -20,22 +20,26 @@ end
 
 bash 'unpack nodejs' do
   user Helper.user
+  group Helper.group
   code "tar -xvzf #{node_tar} -C #{Helper.home}"
 end
 
 bash 'move nodejs' do
   user Helper.user
+  group Helper.group
   code "mv #{node_unpacked_path} #{node_home}"
 end
 
 bash 'link node' do
   user Helper.user
+  group Helper.group
   code "ln -s #{node_home}/bin/node #{node}"
   not_if "test -e #{node}"
 end
 
 bash 'link npm' do
   user Helper.user
+  group Helper.group
   code "ln -s #{node_home}/bin/npm #{npm}"
   not_if "test -e #{npm}"
 end
@@ -47,8 +51,10 @@ end
 
 cookbook_file Helper.home('.npmrc') do
   owner Helper.user
+  group Helper.group
 end
 
 cookbook_file Helper.home('.zsh/node.zsh') do
   owner Helper.user
+  group Helper.group
 end

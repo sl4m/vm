@@ -18,11 +18,13 @@ end
 
 bash 'unpack elasticsearch' do
   user Helper.user
+  group Helper.group
   code "tar -xzvf #{elasticsearch_tar} -C #{Helper.home}"
 end
 
 bash 'move elasticsearch' do
   user Helper.user
+  group Helper.group
   code "mv #{elasticsearch_unpacked_path} #{elasticsearch_home}"
 end
 
@@ -33,10 +35,12 @@ end
 
 cookbook_file Helper.home('.zsh/elasticsearch.zsh') do
   owner Helper.user
+  group Helper.group
 end
 
 cookbook_file File.join(elasticsearch_home, 'elasticsearch.yml') do
   owner Helper.user
+  group Helper.group
 end
 
 cookbook_file '/etc/init.d/elasticsearch' do

@@ -13,6 +13,10 @@ class ::Helper
     'vagrant'
   end
 
+  def self.group
+    'vagrant'
+  end
+
   def self.display
     ':99.0'
   end

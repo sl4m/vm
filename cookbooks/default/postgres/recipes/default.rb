@@ -33,4 +33,5 @@ end
 
 cookbook_file Helper.home('.zsh/postgresql.zsh') do
   owner Helper.user
+  group Helper.group
 end

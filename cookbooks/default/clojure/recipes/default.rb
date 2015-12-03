@@ -5,6 +5,7 @@ lein_bin              = File.join(lein_dir, 'bin', 'lein')
 
 directory lein_bin_dir do
   owner Helper.user
+  group Helper.group
   recursive true
 end
 
@@ -21,6 +22,7 @@ end
 
 directory lein_self_install_dir do
   owner Helper.user
+  group Helper.group
 end
 
 remote_file lein_bin do
@@ -31,9 +33,11 @@ end
 
 bash 'install leiningen' do
   user Helper.user
+  group Helper.group
   code "#{lein_bin} self-install"
 end
 
 cookbook_file Helper.home('.zsh/leiningen.zsh') do
   owner Helper.user
+  group Helper.group
 end

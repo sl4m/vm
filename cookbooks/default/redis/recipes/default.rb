@@ -18,11 +18,13 @@ end
 
 bash 'unpack redis' do
   user Helper.user
+  group Helper.group
   code "tar -xzvf #{redis_tar} -C #{Helper.home}"
 end
 
 bash 'move redis' do
   user Helper.user
+  group Helper.group
   code "mv #{redis_unpacked_path} #{redis_home}"
 end
 
@@ -33,6 +35,7 @@ end
 
 bash 'install redis' do
   user Helper.user
+  group Helper.group
   code <<-EOH
   cd #{redis_home}/
   make
