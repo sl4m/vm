@@ -31,6 +31,7 @@ Vagrant.configure('2') do |config|
     #chef.add_recipe('vim')
     #chef.add_recipe('tmux')
     #chef.add_recipe('ack')
+    #chef.add_recipe('silver_searcher')
     #chef.add_recipe('chruby')
     #chef.add_recipe('ruby_build')
 
