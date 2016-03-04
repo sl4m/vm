@@ -1,6 +1,7 @@
 apt-get -y update
 apt-get -y upgrade
 apt-get -y install linux-headers-$(uname -r) build-essential
+apt-get -y install nfs-common openssl libreadline6 libreadline6-dev curl git-core zlib1g zlib1g-dev libssl-dev libyaml-dev libsqlite3-dev sqlite3 libxml2-dev libxslt1-dev autoconf libc6-dev libncurses5-dev automake libtool bison pkg-config libgdbm-dev libffi-dev ruby-dev
 
 if test -f .vbox_version ; then
   echo "installing VirtualBox Guest Additions..."
@@ -27,16 +28,13 @@ sed -i -e '/Defaults\s\+env_reset/a Defaults\tenv_keep+=SSH_AUTH_SOCK' /etc/sudo
 sed -i -e '/Defaults\s\+env_reset/a Defaults\tenv_keep+=PATH' /etc/sudoers
 sed -i -e 's/%admin ALL=(ALL) ALL/%admin ALL=NOPASSWD:ALL/g' /etc/sudoers
 
-# apt-get install various things necessary (e.g., NFS client, Ruby)
-# and remove optional things to trim down the machine.
-apt-get -y install nfs-common openssl libreadline6 libreadline6-dev curl git-core zlib1g zlib1g-dev libssl-dev libyaml-dev libsqlite3-dev sqlite3 libxml2-dev libxslt1-dev autoconf libc6-dev libncurses5-dev automake libtool bison pkg-config libgdbm-dev libffi-dev ruby-dev
-apt-get clean
 
 # Create .ssh directory
 mkdir /home/vagrant/.ssh
 chmod 700 /home/vagrant/.ssh
 
 # Remove items used for building, since they aren't needed anymore
+apt-get clean
 apt-get -y remove linux-headers-$(uname -r)
 apt-get -y autoremove
 
