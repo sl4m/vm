@@ -1,9 +1,9 @@
 ## Tested against
 
-* Host: Mac OS X 10.11.1, Ubuntu 14.04 LTS
-* Virtualization Providers: VirtualBox 5.0.4, VMware Fusion 7.1.3
-* [Packer^](http://www.packer.io/downloads.html) ~> 0.8.6
-* [Vagrant](http://downloads.vagrantup.com/) ~> 1.7.4
+* Host: Mac OS X 10.11.4, Ubuntu 14.04 LTS
+* Virtualization Providers: VirtualBox 5.0.16, VMware Fusion 7.1.3
+* [Packer^](http://www.packer.io/downloads.html) ~> 0.10.0
+* [Vagrant](http://downloads.vagrantup.com/) ~> 1.8.1
 
 (^) Packer is required to build the custom Ubuntu image.
 
@@ -15,7 +15,7 @@
 cp packer/template.json.example packer/template.json
 ```
 
-Note: `packer/template.json.example` is based on `Packer 0.8.6`.
+Note: `packer/template.json.example` is based on `Packer 0.10.0`.
 
 #### Default hardware settings (adjust variables as necessary)
 
