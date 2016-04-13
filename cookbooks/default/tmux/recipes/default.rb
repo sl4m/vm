@@ -3,6 +3,8 @@ tmux_url           = "https://github.com/tmux/tmux/releases/download/#{tmux_vers
 tmux_tar           = Helper.home("tmux-#{tmux_version}.tar.gz")
 tmux_unpacked_path = Helper.home("tmux-#{tmux_version}")
 
+apt_package 'libevent-dev'
+
 remote_file tmux_tar do
   owner Helper.user
   source tmux_url
