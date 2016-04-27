@@ -1,6 +1,6 @@
 vimrc_dir        = Helper.home('.vimrc')
 vim_dir          = Helper.home('.vim')
-vim_dotfiles_dir = Helper.home('.vim_dotfiles')
+vim_dotfiles_dir = Helper.home('.vim-dotfiles')
 
 directory vim_dotfiles_dir do
   owner Helper.user
