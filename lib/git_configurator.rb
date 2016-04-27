@@ -15,11 +15,12 @@ class GitConfigurator
   end
 
   def create_git_config_file
-    print 'Please enter your full name (for Git config): '
+    puts 'Creating .gitconfig file for the virtual machine'
+    print 'Please enter your full name: '
     @full_name = STDIN.gets.strip
-    print 'Please enter your email (for Git config): '
+    print 'Please enter your email: '
     @email = STDIN.gets.strip
-    print 'Please enter your Github username (for Git config): '
+    print 'Please enter your GitHub username: '
     @username = STDIN.gets.strip
     template_contents = File.open(git_config_template).read
     git_config_contents = ERB.new(template_contents).result(binding)
