@@ -1,45 +1,53 @@
 {
   "min_packer_version": "0.6.0",
   "variables": {
+    "boot_command_prefix": "<enter><wait><f6><esc><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs>",
     "cpu_cores": "4",
-    "disk_size": "20140",
-    "memory": "4096",
+    "disk_size": "30210",
+    "memory": "8192",
     "boot_wait": "5s",
     "headless": "true",
     "http_directory": "packer/preseed",
-    "iso_checksum": "07e4bb5569814eab41fafac882ba127893e3ff0bdb7ec931c9b2d040e3e94e7a",
+    "iso_checksum": "b8b172cbdf04f5ff8adc8c2c1b4007ccf66f00fc6a324a6da6eba67de71746f6",
     "iso_checksum_type": "sha256",
-    "iso_url": "http://releases.ubuntu.com/trusty/ubuntu-14.04.4-server-amd64.iso",
-    "shutdown_command": "echo 'vagrant' | sudo -S shutdown -P now",
+    "iso_url": "http://releases.ubuntu.com/xenial/ubuntu-16.04-server-amd64.iso",
+    "ssh_fullname": "vagrant",
     "ssh_password": "vagrant",
     "ssh_port": "22",
     "ssh_public_key": "",
     "ssh_username": "vagrant",
     "ssh_wait_timeout": "20m",
-    "sudo": "echo 'vagrant'|sudo -S sh",
     "vm_name": "vm"
   },
   "builders": [
     {
       "type": "virtualbox-iso",
       "boot_command": [
-        "<esc><esc><enter><wait>",
-        "/install/vmlinuz noapic preseed/url=http://{{ .HTTPIP }}:{{ .HTTPPort }}/preseed.cfg ",
+        "{{user `boot_command_prefix`}}",
+        "/install/vmlinuz noapic preseed/url=http://{{.HTTPIP}}:{{.HTTPPort}}/preseed.cfg ",
         "debian-installer=en_US auto locale=en_US kbd-chooser/method=us ",
-        "hostname={{ .Name }} ",
+        "hostname={{.Name}} ",
         "fb=false debconf/frontend=noninteractive ",
-        "keyboard-configuration/modelcode=SKIP keyboard-configuration/layout=USA keyboard-configuration/variant=USA console-setup/ask_detect=false ",
-        "initrd=/install/initrd.gz -- <enter>"
+        "keyboard-configuration/modelcode=SKIP ",
+        "keyboard-configuration/layout=USA ",
+        "keyboard-configuration/variant=USA ",
+        "console-setup/ask_detect=false ",
+        "initrd=/install/initrd.gz ",
+        "passwd/user-fullname={{user `ssh_fullname`}} ",
+        "passwd/user-password={{user `ssh_password`}} ",
+        "passwd/user-password-again={{user `ssh_password`}} ",
+        "passwd/username={{user `ssh_username`}} ",
+        "-- <enter>"
       ],
       "boot_wait": "{{user `boot_wait`}}",
       "disk_size": "{{user `disk_size`}}",
       "guest_os_type": "Ubuntu_64",
       "headless": "{{user `headless`}}",
-      "http_directory": "{{ user `http_directory`}}",
+      "http_directory": "{{user `http_directory`}}",
       "iso_checksum": "{{user `iso_checksum`}}",
       "iso_checksum_type": "{{user `iso_checksum_type`}}",
       "iso_url": "{{user `iso_url`}}",
-      "shutdown_command": "{{user `shutdown_command`}}",
+      "shutdown_command": "echo '{{user `ssh_password`}}' | sudo -S shutdown -P now",
       "ssh_password": "{{user `ssh_password`}}",
       "ssh_port": "{{user `ssh_port`}}",
       "ssh_username": "{{user `ssh_username`}}",
@@ -63,13 +71,21 @@
     {
       "type": "vmware-iso",
       "boot_command": [
-        "<esc><esc><enter><wait>",
-        "/install/vmlinuz noapic preseed/url=http://{{ .HTTPIP }}:{{ .HTTPPort }}/preseed.cfg ",
+        "{{user `boot_command_prefix`}}",
+        "/install/vmlinuz noapic preseed/url=http://{{.HTTPIP}}:{{.HTTPPort}}/preseed.cfg ",
         "debian-installer=en_US auto locale=en_US kbd-chooser/method=us ",
-        "hostname={{ .Name }} ",
+        "hostname={{.Name}} ",
         "fb=false debconf/frontend=noninteractive ",
-        "keyboard-configuration/modelcode=SKIP keyboard-configuration/layout=USA keyboard-configuration/variant=USA console-setup/ask_detect=false ",
-        "initrd=/install/initrd.gz -- <enter>"
+        "keyboard-configuration/modelcode=SKIP ",
+        "keyboard-configuration/layout=USA ",
+        "keyboard-configuration/variant=USA ",
+        "console-setup/ask_detect=false ",
+        "initrd=/install/initrd.gz ",
+        "passwd/user-fullname={{user `ssh_fullname`}} ",
+        "passwd/user-password={{user `ssh_password`}} ",
+        "passwd/user-password-again={{user `ssh_password`}} ",
+        "passwd/username={{user `ssh_username`}} ",
+        "-- <enter>"
       ],
       "boot_wait": "{{user `boot_wait`}}",
       "disk_size": "{{user `disk_size`}}",
@@ -80,7 +96,7 @@
       "iso_checksum": "{{user `iso_checksum`}}",
       "iso_checksum_type": "{{user `iso_checksum_type`}}",
       "iso_url": "{{user `iso_url`}}",
-      "shutdown_command": "{{user `shutdown_command`}}",
+      "shutdown_command": "echo '{{user `ssh_password`}}' | sudo -S shutdown -P now",
       "ssh_password": "{{user `ssh_password`}}",
       "ssh_port": "{{user `ssh_port`}}",
       "ssh_username": "{{user `ssh_username`}}",
@@ -100,30 +116,24 @@
       "type": "shell",
       "override": {
         "virtualbox-iso": {
-          "execute_command": "{{user `sudo`}} '{{.Path}}'"
+          "execute_command": "echo '{{user `ssh_password`}}' | {{.Vars}} sudo -E -S bash '{{.Path}}'"
         },
         "vmware-iso": {
-          "execute_command": "{{user `sudo`}} '{{.Path}}'"
+          "execute_command": "echo '{{user `ssh_password`}}' | {{.Vars}} sudo -E -S bash '{{.Path}}'"
         }
       },
-      "scripts": ["packer/provisioning/postinstall.sh"]
-    },
-    {
-      "type": "shell",
-      "override": {
-        "virtualbox-iso": {
-          "execute_command": "{{user `sudo`}} '{{.Path}}'"
-        },
-        "vmware-iso": {
-          "execute_command": "{{user `sudo`}} '{{.Path}}'"
-        }
-      },
-      "inline": [
-        "echo '{{user `ssh_public_key`}}' > /home/vagrant/.ssh/authorized_keys",
-        "chmod 600 /home/vagrant/.ssh/authorized_keys",
-        "chown -R vagrant /home/vagrant/.ssh",
-        "sed -i -e 's/#PasswordAuthentication yes/PasswordAuthentication no/g' /etc/ssh/sshd_config",
-        "sudo service ssh restart"
+      "environment_vars": [
+        "SSH_USERNAME={{user `ssh_username`}}",
+        "SSH_PUBLIC_KEY={{user `ssh_public_key`}}"
+      ],
+      "scripts": [
+        "packer/provisioning/upgrade_packages.sh",
+        "packer/provisioning/virtualbox.sh",
+        "packer/provisioning/vmware.sh",
+        "packer/provisioning/sudoers.sh",
+        "packer/provisioning/ssh.sh",
+        "packer/provisioning/networking_fix.sh",
+        "packer/provisioning/cleanup.sh"
       ]
     }
   ],
@@ -135,4 +145,3 @@
     }
   ]
 }
-
