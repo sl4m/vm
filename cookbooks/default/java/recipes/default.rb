@@ -1,3 +1,3 @@
-%w(openjdk-7-jre-headless openjdk-7-jdk).each do |p|
+%w(openjdk-8-jre-headless openjdk-8-jdk).each do |p|
   apt_package p
 end

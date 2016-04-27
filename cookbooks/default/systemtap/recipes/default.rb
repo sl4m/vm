@@ -1,1 +1,1 @@
-apt-package systemtap
+apt_package 'systemtap'
