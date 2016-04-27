@@ -5,6 +5,7 @@ node_home          = Helper.home('.nodejs')
 node_unpacked_path = Helper.home(node_package)
 node               = "#{Helper.home('.bin')}/node"
 npm                = "#{Helper.home('.bin')}/npm"
+npm_global         = Helper.home('.npm_global')
 
 remote_file node_tar do
   owner Helper.user
@@ -14,8 +15,14 @@ end
 
 directory node_home do
   owner Helper.user
+  group Helper.group
   action :delete
   recursive true
+end
+
+directory npm_global do
+  user Helper.user
+  group Helper.group
 end
 
 bash 'unpack nodejs' do

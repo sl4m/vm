@@ -3,6 +3,11 @@ lein_bin_dir          = File.join(lein_dir, 'bin')
 lein_self_install_dir = File.join(lein_dir, 'self-installs')
 lein_bin              = File.join(lein_dir, 'bin', 'lein')
 
+directory lein_dir do
+  owner Helper.user
+  group Helper.group
+end
+
 directory lein_bin_dir do
   owner Helper.user
   group Helper.group
