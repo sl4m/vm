@@ -7,7 +7,7 @@
 * [Packer^](http://www.packer.io/downloads.html) ~> 0.10.0
 * [Vagrant](http://downloads.vagrantup.com/) ~> 1.8.1
 
-(^) Packer is required to build the custom Ubuntu 16.04 LTS image.
+(^) Packer is required to build the custom Ubuntu 14.04/16.04 LTS image.
 
 ## Installation
 
@@ -16,7 +16,7 @@
 1. sets the virtual machine to use Europe/London (aka GMT) as your time zone (in `packer/preseed/preseed.cfg`)
 2. defaults to an admin user, `vagrant` (in `packer/template.json`)
 3. applies no password in sudoers for `vagrant` user (in `packer/provisioning/sudoers.sh`)
-4. disables systemd's [PredictableNetworkInterfaceNames](http://www.freedesktop.org/wiki/Software/systemd/PredictableNetworkInterfaceNames/) to work with `vagrant` (in `packer/provisioning/networking_fix.sh`)
+4. in Ubuntu 16.04, disables systemd's [PredictableNetworkInterfaceNames](http://www.freedesktop.org/wiki/Software/systemd/PredictableNetworkInterfaceNames/) to work with `vagrant` (in `packer/provisioning/networking_fix.sh`)
 
 ### Default hardware settings (adjust variables as necessary)
 
@@ -36,22 +36,24 @@ Note: `packer/template.json.example` is based on `Packer 0.6.0`.
   * Configure and uncomment recipes that you want to cook.
   * Optionally create your own recipes and place in the `cookbooks/custom` directory
 
-### One click install command
+### One line install command
 
 When you're ready, run the following depending on your target virtualization provider:
 
 ```
-rake virtualbox:install
-rake vmware:install
+rake virtualbox:build_and_provision
+rake vmware:build_and_provision
 ```
 
 ## Commonly used vagrant commands
 
 ```
-  vagrant up      # starts vagrant
-  vagrant ssh     # SSH into vagrant
-  vagrant reload  # restarts vagrant
-  vagrant halt    # stops vagrant
+  vagrant up        # starts vagrant
+  vagrant provision # provisions vm (without restarting)
+  vagrant ssh       # SSH into vagrant
+  vagrant reload    # restarts vagrant
+  vagrant halt      # stops vagrant
+  vagrant status    # check to see if vm is running
 ```
 
 ## Gotchas

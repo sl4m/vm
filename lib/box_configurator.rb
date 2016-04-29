@@ -1,8 +1,9 @@
 class BoxConfigurator
-  attr_reader :ssh_public_key
+  attr_reader :hostname, :ssh_public_key
 
-  def initialize(provider, ssh_public_key)
+  def initialize(provider, hostname, ssh_public_key)
     @provider       = provider
+    @hostname       = hostname
     @ssh_public_key = ssh_public_key
   end
 

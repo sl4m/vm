@@ -1,32 +1,22 @@
-BOX_NAME  = 'vm'
+HOST_NAME = BOX_NAME  = 'vm'
 DEFAULT_SSH_PATH = 'packer/keys'
 DEFAULT_SSH_PUBLIC_KEY = "#{DEFAULT_SSH_PATH}/vm.pub"
 ROOT_PATH = File.expand_path(File.dirname(__FILE__))
+LINUX_VERSION_PATH = File.join(ROOT_PATH, 'packer', 'linux_versions')
 
 provider_builder = lambda do |provider|
   namespace provider do
-    desc "Only builds the default #{provider} using packer."
-    task :build => ['settings', 'default:create']
+    desc "Only builds the #{provider} base box using packer."
+    task :build_base_box => ['settings', 'box:create']
 
-    desc "Builds the default #{provider} using packer, and provisions using vagrant."
-    task :install => ['settings', 'default:install']
+    desc "Builds the #{provider} base box using packer, and provisions using vagrant."
+    task :build_and_provision => ['settings', 'box:create', 'vm:start']
 
-    desc "Reinstalls the default #{provider} using packer, and provisions using vagrant."
-    task :reinstall => :install
-
-    desc "Rebuilds from the existing default #{provider}"
-    task :rebuild => ['settings', 'default:rebuild']
-
-    desc "Start the #{provider} vm with provisioning"
-    task :provision => ['settings', 'vm:provision']
-
-    desc "Start the #{provider} vm (no provisioning)"
-    task :up => ['settings', 'vm:up']
-
-    desc "Shuts down #{provider} vm"
-    task :down => ['settings', 'vm:down']
+    desc "Re-installs and provisions from the existing #{provider} base box"
+    task :reinstall => ['settings', 'box:reinstall']
 
     task :settings => ['setup_ssh'] do
+      linux_version
       BOX_CONFIGURATOR = box_configurator(provider)
     end
   end
@@ -35,14 +25,9 @@ end
 provider_builder.call(:virtualbox)
 provider_builder.call(:vmware)
 
-namespace :default do
-  task :create  => 'box:create'
-  task :install => ['box:create', 'vm:start']
-  task :rebuild => 'box:rebuild'
-end
-
 namespace :box do
   task :create => [:destroy, :remove, :build, :add]
+  task :reinstall => [:destroy, 'vm:start']
 
   # destroys the current box
   task :destroy do
@@ -65,8 +50,6 @@ namespace :box do
   task :add do
     sh vagrant.add_command(BOX_NAME)
   end
-
-  task :rebuild => [:destroy, 'vm:start']
 end
 
 namespace :vm do
@@ -96,12 +79,20 @@ namespace :vm do
   end
 end
 
-desc "Generate vm specific public/private key pair"
 task :setup_ssh do
   if !ENV['VAGRANT_PUBLIC_KEY'] && !File.exists?(DEFAULT_SSH_PUBLIC_KEY)
     require "#{ROOT_PATH}/lib/tools/ssh"
     SshKeyGenerator.new(DEFAULT_SSH_PATH).execute
   end
+end
+
+def linux_version
+  @linux_version ||= (
+    require "#{ROOT_PATH}/lib/linux_chooser"
+    version = LinuxChooser.new(LINUX_VERSION_PATH).execute
+    puts "You chose #{version}."
+    version
+  )
 end
 
 def default_ssh_public_key
@@ -112,7 +103,7 @@ def packer
   @packer ||= (
     check_configurator
     require "#{ROOT_PATH}/lib/tools/packer"
-    Tools::Packer.new(BOX_CONFIGURATOR)
+    Tools::Packer.new(BOX_CONFIGURATOR, linux_version)
   )
 end
 
@@ -120,7 +111,7 @@ def vagrant
   @vagrant ||= (
     check_configurator
     require "#{ROOT_PATH}/lib/tools/vagrant"
-    Tools::Vagrant.new(BOX_CONFIGURATOR)
+    Tools::Vagrant.new(BOX_CONFIGURATOR, linux_version)
   )
 end
 
@@ -128,7 +119,8 @@ def check_configurator
   raise 'BOX_CONFIGURATOR not set!' unless defined? BOX_CONFIGURATOR
 end
 
-def box_configurator(type)
+def box_configurator(provider_type)
   require "#{ROOT_PATH}/lib/box_configurator"
-  BoxConfigurator.new(type, ENV['VAGRANT_PUBLIC_KEY'] || default_ssh_public_key)
+  public_ssh_key = ENV['VAGRANT_PUBLIC_KEY'] || default_ssh_public_key
+  BoxConfigurator.new(provider_type, HOST_NAME, public_ssh_key)
 end

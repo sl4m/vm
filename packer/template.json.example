@@ -7,17 +7,18 @@
     "memory": "4096",
     "boot_wait": "5s",
     "headless": "true",
+    "hostname": "",
     "http_directory": "packer/preseed",
-    "iso_checksum": "b8b172cbdf04f5ff8adc8c2c1b4007ccf66f00fc6a324a6da6eba67de71746f6",
-    "iso_checksum_type": "sha256",
-    "iso_url": "http://releases.ubuntu.com/xenial/ubuntu-16.04-server-amd64.iso",
+    "iso_checksum": "",
+    "iso_checksum_type": "",
+    "iso_url": "",
     "ssh_fullname": "vagrant",
     "ssh_password": "vagrant",
     "ssh_port": "22",
     "ssh_public_key": "",
     "ssh_username": "vagrant",
     "ssh_wait_timeout": "20m",
-    "vm_name": "vm"
+    "vm_name": ""
   },
   "builders": [
     {
@@ -26,7 +27,7 @@
         "{{user `boot_command_prefix`}}",
         "/install/vmlinuz noapic preseed/url=http://{{.HTTPIP}}:{{.HTTPPort}}/preseed.cfg ",
         "debian-installer=en_US auto locale=en_US kbd-chooser/method=us ",
-        "hostname={{.Name}} ",
+        "hostname={{user `hostname`}} ",
         "fb=false debconf/frontend=noninteractive ",
         "keyboard-configuration/modelcode=SKIP ",
         "keyboard-configuration/layout=USA ",
@@ -74,7 +75,7 @@
         "{{user `boot_command_prefix`}}",
         "/install/vmlinuz noapic preseed/url=http://{{.HTTPIP}}:{{.HTTPPort}}/preseed.cfg ",
         "debian-installer=en_US auto locale=en_US kbd-chooser/method=us ",
-        "hostname={{.Name}} ",
+        "hostname={{user `hostname`}} ",
         "fb=false debconf/frontend=noninteractive ",
         "keyboard-configuration/modelcode=SKIP ",
         "keyboard-configuration/layout=USA ",
@@ -140,7 +141,7 @@
   "post-processors": [
     {
       "type": "vagrant",
-      "output": "vm-{{.Provider}}.box",
+      "output": "{{user `vm_name`}}-{{.Provider}}.box",
       "vagrantfile_template": "packer/post_processing/Vagrantfile.template"
     }
   ]

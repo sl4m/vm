@@ -1,11 +1,12 @@
 module Tools
   class Vagrant
-    def initialize(configurator)
-      @configurator = configurator
+    def initialize(configurator, linux_version)
+      @configurator  = configurator
+      @linux_version = linux_version
     end
 
     def add_command(box_name)
-      "vagrant box add #{box_name} #{box_name}-#{configurator.vagrant}.box"
+      "vagrant box add #{box_name} #{linux_version}-#{configurator.vagrant}.box"
     end
 
     def destroy_command
@@ -38,6 +39,6 @@ module Tools
 
     private
 
-    attr_reader :configurator
+    attr_reader :configurator, :linux_version
   end
 end
