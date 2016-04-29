@@ -3,8 +3,8 @@
   "variables": {
     "boot_command_prefix": "<enter><wait><f6><esc><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs>",
     "cpu_cores": "4",
-    "disk_size": "30210",
-    "memory": "8192",
+    "disk_size": "20140",
+    "memory": "4096",
     "boot_wait": "5s",
     "headless": "true",
     "http_directory": "packer/preseed",
