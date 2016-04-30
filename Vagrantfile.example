@@ -20,6 +20,7 @@ Vagrant.configure('2') do |config|
     chef.add_recipe('helper::setup')
 
     # Dev Tools
+    #chef.add_recipe('linux_debug')
     #chef.add_recipe('perf')
     #chef.add_recipe('git')
     #chef.add_recipe('zsh')
@@ -37,6 +38,7 @@ Vagrant.configure('2') do |config|
     #chef.add_recipe('coffee_script') # requires node recipe
     #chef.add_recipe('go')
     #chef.add_recipe('ruby')
+    #chef.add_recipe('rust')
 
     # Language Tools
     #chef.add_recipe('chruby')
