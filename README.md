@@ -18,6 +18,13 @@
 3. applies no password in sudoers for `vagrant` user (in `packer/provisioning/sudoers.sh`)
 4. in Ubuntu 16.04, disables systemd's [PredictableNetworkInterfaceNames](http://www.freedesktop.org/wiki/Software/systemd/PredictableNetworkInterfaceNames/) to work with `vagrant` (in `packer/provisioning/networking_fix.sh`)
 
+You can switch from `systemd` to Upstart on Ubuntu 16.04 by performing the following commands:
+
+```
+sudo apt-get install upstart-sysv
+sudo update-initramfs -u
+```
+
 ### Default hardware settings (adjust variables as necessary)
 
 ```
