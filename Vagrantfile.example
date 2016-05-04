@@ -58,9 +58,6 @@ Vagrant.configure('2') do |config|
     # Messaging System
     #chef.add_recipe('rabbitmq')
 
-    # Crypto
-    #chef.add_recipe('mcrypt')
-
     # Headless browsers
     #chef.add_recipe('phantomjs')
 
