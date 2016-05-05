@@ -1,1 +1,3 @@
-apt_package 'procenv'
+%w(htop ipcalc ncdu procenv vnstat).each do |package|
+  apt_package package
+end
