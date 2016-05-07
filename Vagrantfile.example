@@ -52,6 +52,9 @@ Vagrant.configure('2') do |config|
     #chef.add_recipe('riak')
     #chef.add_recipe('sqlite')
 
+    # Deployment tools
+    #chef.add_recipe('terraform')
+
     # Search Engines
     #chef.add_recipe('elasticsearch')
 
