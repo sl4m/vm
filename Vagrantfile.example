@@ -43,6 +43,7 @@ Vagrant.configure('2') do |config|
     # Language Tools
     #chef.add_recipe('chruby')
     #chef.add_recipe('ruby_build')
+    #chef.add_recipe('intellij')
 
     # Datastores
     #chef.add_recipe('memcached')

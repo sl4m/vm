@@ -63,6 +63,24 @@ rake vmware:build_and_provision
   vagrant status    # check to see if vm is running
 ```
 
+## Running IntelliJ and other X11 apps
+
+On your virtual machine, edit `/etc/ssh/sshd_config` and add the following:
+
+```
+X11Forwarding yes
+X11DisplayOffset 10
+X11UseLocalhost yes
+```
+
+Restart the ssh service. Your host machine will need an X11 client. For example, on Mac OS X, you can use [XQuartz](https://www.xquartz.org/). Then simply run from your terminal:
+
+```
+vagrant ssh -- -X
+```
+
+The `X` flag enables X11 forwarding for the SSH session. Inside your virtual machine, run the `idea.sh` script from the IntelliJ directory and it should launch an `XQuartz` instance automagically on your host.
+
 ## Gotchas
 
 1. If your vm cannot connect to the internet (this typically happens when you switch from one network to another on a VirtualBox vm), run this command:
