@@ -1,3 +1,3 @@
-%w(htop ipcalc ncdu procenv vnstat).each do |package|
+%w(dnsutils htop ipcalc ncdu procenv vnstat).each do |package|
   apt_package package
 end
