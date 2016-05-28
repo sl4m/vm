@@ -14,6 +14,7 @@ Vagrant.configure('2') do |config|
   #config.vm.synced_folder "git", "/home/vagrant/dir_to_share", :nfs => true
 
   config.vm.provision :chef_solo do |chef|
+    chef.version = '12.10.24'
     chef.cookbooks_path = %w(cookbooks/default cookbooks/custom)
     chef.custom_config_path = 'cookbooks/solo_config.rb'
 
