@@ -1,4 +1,4 @@
-intellij_version       = 'ideaIC-2016.1.1'
+intellij_version       = 'ideaIC-2016.2.1'
 intellij_url           = "https://download.jetbrains.com/idea/#{intellij_version}.tar.gz"
 intellij_tar           = Helper.home('intellij.tar.gz')
 intellij_home          = Helper.home('.intellij')
