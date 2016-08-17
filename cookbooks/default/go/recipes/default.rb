@@ -13,6 +13,7 @@ end
 
 directory golang_home do
   owner Helper.user
+  group Helper.group
   action :delete
   recursive true
 end
