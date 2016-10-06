@@ -1,5 +1,5 @@
-node_package       = "node-v0.12.7-linux-x64"
-node_url           = "https://nodejs.org/dist/v0.12.7/#{node_package}.tar.gz"
+node_package       = "node-v4.5.0-linux-x64"
+node_url           = "https://nodejs.org/dist/v4.5.0/#{node_package}.tar.gz"
 node_tar           = Helper.home('nodejs.tar.gz')
 node_home          = Helper.home('.nodejs')
 node_unpacked_path = Helper.home(node_package)
