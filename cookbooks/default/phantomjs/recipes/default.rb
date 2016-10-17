@@ -1,6 +1,6 @@
 apt_package 'libfontconfig1-dev'
 
-phantom_package       = 'phantomjs-1.9.8-linux-x86_64'
+phantom_package       = 'phantomjs-2.1.1-linux-x86_64'
 phantom_url           = "https://bitbucket.org/ariya/phantomjs/downloads/#{phantom_package}.tar.bz2"
 phantom_tar           = Helper.home('phantomjs.tar.bz2')
 phantom_home          = Helper.home('.phantomjs')
