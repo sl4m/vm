@@ -1,4 +1,4 @@
-golang_package       = 'go1.6.2'
+golang_package       = 'go1.7.4'
 golang_url           = "https://storage.googleapis.com/golang/#{golang_package}.linux-amd64.tar.gz"
 golang_tar           = Helper.home('golang.tar.gz')
 golang_home          = Helper.home('.golang')
