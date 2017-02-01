@@ -2,10 +2,10 @@
 
 ## Tested against
 
-* Host: Mac OS X El Capitan 10.11.4
-* Virtualization Providers: VirtualBox 5.0.18, VMware Fusion 7.1.3
-* [Packer^](http://www.packer.io/downloads.html) ~> 0.10.0
-* [Vagrant](http://downloads.vagrantup.com/) ~> 1.8.1
+* Host: MacOS Sierra 10.12.3
+* Virtualization Providers: VirtualBox 5.1.14, VMware Fusion 7.1.3
+* [Packer^](http://www.packer.io/downloads.html) ~> 0.12.2
+* [Vagrant](http://downloads.vagrantup.com/) ~> 1.9.1
 
 (^) Packer is required to build the custom Ubuntu 14.04/16.04 LTS image.
 
@@ -73,7 +73,7 @@ X11DisplayOffset 10
 X11UseLocalhost yes
 ```
 
-Restart the ssh service. Your host machine will need an X11 client. For example, on Mac OS X, you can use [XQuartz](https://www.xquartz.org/). Then simply run from your terminal:
+Restart the ssh service. Your host machine will need an X11 client. For example, on MacOS, you can use [XQuartz](https://www.xquartz.org/). Then simply run from your terminal:
 
 ```
 vagrant ssh -- -X
