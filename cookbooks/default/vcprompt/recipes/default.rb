@@ -1,8 +1,3 @@
-directory Helper.home('.bin') do
-  owner Helper.user
-  group Helper.group
-end
-
 vcprompt_exec = "#{Helper.home('.bin')}/vcprompt"
 
 bash 'install vcprompt' do

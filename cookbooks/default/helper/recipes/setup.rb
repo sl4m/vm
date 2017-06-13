@@ -30,3 +30,8 @@ class ::Helper
 end
 
 ENV['HOME'] = Helper.home
+
+directory Helper.home('.bin') do
+  owner Helper.user
+  group Helper.group
+end
