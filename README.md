@@ -2,18 +2,18 @@
 
 ## Tested against
 
-* Host: MacOS Sierra 10.12.3
+* Host: MacOS Mojave 10.14
 * Virtualization Providers: VirtualBox 5.1.14, VMware Fusion 7.1.3
-* [Packer^](http://www.packer.io/downloads.html) ~> 0.12.2
-* [Vagrant](http://downloads.vagrantup.com/) ~> 1.9.1
+* [Packer^](http://www.packer.io/downloads.html) ~> 1.3.1
+* [Vagrant](http://downloads.vagrantup.com/) ~> 2.1.5
 
-(^) Packer is required to build the custom Ubuntu 14.04/16.04 LTS image.
+(^) Packer is required to build the custom Ubuntu 16.04/18.04 LTS image.
 
 ## Installation
 
 ### Notes
 
-1. sets the virtual machine to use Europe/London (aka GMT) as your time zone (in `packer/preseed/preseed.cfg`)
+1. sets the virtual machine to use UTC as your time zone (in `packer/preseed/preseed.cfg`)
 2. defaults to an admin user, `vagrant` (in `packer/template.json`)
 3. applies no password in sudoers for `vagrant` user (in `packer/provisioning/sudoers.sh`)
 4. in Ubuntu 16.04, disables systemd's [PredictableNetworkInterfaceNames](http://www.freedesktop.org/wiki/Software/systemd/PredictableNetworkInterfaceNames/) to work with `vagrant` (in `packer/provisioning/networking_fix.sh`)
@@ -99,4 +99,4 @@ folders will be prepared and mounted on the VM." Read the workaround solution [h
 
 ## Credits
 
-Some things taken from [boxcutter/ubuntu](https://github.com/boxcutter/ubuntu) repo. Thanks guys!
+Some things taken from [boxcutter/ubuntu](https://github.com/boxcutter/ubuntu) repo. Thanks!

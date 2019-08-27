@@ -36,7 +36,7 @@ class LinuxChooser
     @linux_versions ||= (
       Dir.glob("#{linux_version_path}/*.json").map do |file|
         File.basename(file, '.*')
-      end
+      end.sort.reverse
     )
   end
 
